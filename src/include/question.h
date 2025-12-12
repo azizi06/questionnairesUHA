@@ -1,16 +1,9 @@
-#ifndef QUESTIONS_H
-#define QUESTIONS_H
+#ifndef QUESTION_H
+#define ifndef QUESTION_H
+
+class question{
 
 
-class questions
-{
-    public:
-        questions();
-        virtual ~questions();
-
-    protected:
-
-    private:
 };
+#endif // QUESTION_H
 
-#endif // QUESTIONS_H
