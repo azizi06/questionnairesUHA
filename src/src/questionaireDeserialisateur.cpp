@@ -1,11 +1,11 @@
 #include "questionDeserialisateur.h"
 
-questionDeserialisateur::questionDeserialisateur()
+questionaireDeserialisateur::questionDeserialisateur()
 {
     //ctor
 }
 
-questionDeserialisateur::~questionDeserialisateur()
+questionaireDeserialisateur::~questionDeserialisateur()
 {
     //dtor
 }

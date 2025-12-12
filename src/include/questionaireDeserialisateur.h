@@ -1,16 +1,16 @@
-#ifndef QUESTIONDESERIALISATEUR_H
-#define QUESTIONDESERIALISATEUR_H
+#ifndef QUESTIONAIRESERIALISATEUR_H
+#define QUESTIONAIRESERIALISATEUR_H
 
 
-class questionDeserialisateur
+class questionaireDeserialisateur
 {
     public:
-        questionDeserialisateur();
-        virtual ~questionDeserialisateur();
+        questionaireDeserialisateur();
+        virtual ~questionaireDeserialisateur();
 
     protected:
 
     private:
 };
 
-#endif // QUESTIONDESERIALISATEUR_H
+#endif //QUESTIONAIRESERIALISATEUR_H
