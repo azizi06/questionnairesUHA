@@ -1,11 +1,11 @@
 #include "questions.h"
 
-questions::questions()
+question::questions()
 {
     //ctor
 }
 
-questions::~questions()
+question::~questions()
 {
     //dtor
 }
