@@ -8,7 +8,7 @@ class questionaireDeserialisateur
         questionaireDeserialisateur();
         virtual ~questionaireDeserialisateur();
 
-    protected:
+    
 
     private:
 };
