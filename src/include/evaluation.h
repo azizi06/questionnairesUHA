@@ -1,7 +1,7 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
-#include "Questionnaire.h"
+#include "questionnaire.h"
 #include "StrategieEvaluation.h"
 
 /*
