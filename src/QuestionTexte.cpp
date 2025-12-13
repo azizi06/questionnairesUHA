@@ -1,14 +1,14 @@
-#include "QuestionTexte.h"
+#include "questionTexte.h"
 
-QuestionTexte::QuestionTexte(const std::string& i,
-                             const std::string& t,
-                             const std::string& r)
-    : Question(i, t), reponse(r) {}
+questionTexte::questionTexte(const std::string& intitule,const std::string& texte,const std::string& reponse)
+    : question(intitule, texte), d_reponse{reponse} {}
 
-bool QuestionTexte::estBonneReponse(const std::string& r) const {
-    return r == reponse;
+bool questionTexte::estBonneReponse(const std::string& reponse) const
+{
+    return reponse ==d_reponse;
 }
 
-std::string QuestionTexte::getReponseCorrecte() const {
-    return reponse;
+std::string questionTexte::getReponseCorrecte() const
+{
+    return d_reponse;
 }

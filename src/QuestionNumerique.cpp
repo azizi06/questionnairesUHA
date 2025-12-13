@@ -1,22 +1,21 @@
-#include "QuestionNumerique.h"
+#include "questionNumerique.h"
 #include <stdexcept>
 
-QuestionNumerique::QuestionNumerique(const std::string& i,
-                                     const std::string& t,
-                                     int r,
-                                     int minV,
-                                     int maxV)
-    : Question(i, t), reponse(r), minVal(minV), maxVal(maxV) {}
+questionNumerique::questionNumerique(const std::string& intitule,const std::string& texte,int reponse,int valeurMin,int valeurMax):
+    question(intitule, texte), d_reponse{reponse}, d_valeurMin{valeurMin}, d_valeurMax{valeurMax} {}
 
-bool QuestionNumerique::estBonneReponse(const std::string& r) const {
+bool questionNumerique::estBonneReponse(const std::string& reponse) const {
     try {
-        int val = std::stoi(r);
-        return (val == reponse && val >= minVal && val <= maxVal);
-    } catch (...) {
+        int valeur = std::stoi(reponse);
+        return valeur ==d_reponse;
+    }
+    catch (...) {
+        //si c'est pas un nombre en retourn faux
         return false;
     }
 }
 
-std::string QuestionNumerique::getReponseCorrecte() const {
-    return std::to_string(reponse);
+
+std::string questionNumerique::getReponseCorrecte() const {
+    return std::to_string(d_reponse);
 }

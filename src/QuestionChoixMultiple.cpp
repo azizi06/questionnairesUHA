@@ -1,21 +1,17 @@
 #include "QuestionChoixMultiple.h"
 #include <stdexcept>
 
-QuestionChoixMultiple::QuestionChoixMultiple(const std::string& i,
-                                             const std::string& t,
-                                             const std::vector<std::string>& opts,
-                                             int correct)
-    : Question(i, t), options(opts), bonneReponse(correct) {}
+questionChoixMultiple::questionChoixMultiple(const std::string& intitule,const std::string& texte,const std::vector<std::string>& options,int correct)
+    : question(intitule,texte), d_options{options}, d_bonneReponse{correct} {}
 
-bool QuestionChoixMultiple::estBonneReponse(const std::string& r) const {
+bool questionChoixMultiple::estBonneReponse(const std::string& reponse) const
+{
     try {
-        int val = std::stoi(r);
-        return val == bonneReponse;
-    } catch (...) {
-        return false;
-    }
+        int valeur =std::stoi(reponse);
+        return valeur ==d_bonneReponse;
+    } catch (...) {return false;}
 }
 
-std::string QuestionChoixMultiple::getReponseCorrecte() const {
-    return std::to_string(bonneReponse);
+std::string questionChoixMultiple::getReponseCorrecte() const {
+    return std::to_string(d_bonneReponse);
 }

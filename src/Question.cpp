@@ -1,12 +1,14 @@
-#include "Question.h"
+#include "question.h"
 
-Question::Question(const std::string& i, const std::string& t)
-    : intitule(i), texte(t) {}
+question::question(const std::string& intitule, const std::string& texte)
+    : d_intitule{intitule}, d_texte{texte} {}
 
-std::string Question::getIntitule() const {
-    return intitule;
+std::string question::Intitule() const
+{
+    return d_intitule;
 }
 
-std::string Question::getTexte() const {
-    return texte;
+std::string question::Texte() const
+{
+    return d_texte;
 }
