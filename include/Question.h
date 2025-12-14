@@ -4,20 +4,20 @@
 #include <string>
 
 class Question {
+protected:
+    std::string intitule;
+    std::string texte;
+
 public:
     Question(const std::string& intitule, const std::string& texte);
+    virtual ~Question() = default;
 
     std::string getIntitule() const;
     std::string getTexte() const;
 
-    virtual bool estBonneReponse(const std::string& r) const = 0;
-    virtual std::string bonneReponse() const = 0;
 
-    virtual ~Question() {}
-
-protected:
-    std::string m_intitule;
-    std::string m_texte;
+    virtual bool estBonneReponse(const std::string& reponse) const = 0;
+    virtual std::string getReponseCorrecte() const = 0;
 };
 
 #endif
