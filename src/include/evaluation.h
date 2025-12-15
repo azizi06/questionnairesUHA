@@ -1,11 +1,13 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
+#include <string>
+
 #include "questionnaire.h"
-#include "StrategieEvaluation.h"
+#include "strategieEvaluation.h"
 
 /*
- Classe Evaluation :
+ Classe evaluation :
  - gère le déroulement d'une évaluation
  - utilise une stratégie d'évaluation
  - calcule les résultats
@@ -22,7 +24,7 @@ private:
 
 public:
     // Constructeur : une évaluation est faite à partir d'un questionnaire
-    evaluation(Questionnaire* q, StrategieEvaluation* s);
+    evaluation(questionnaire* q, strategieEvaluation* s);
 
     // Démarrer l'évaluation
     void commencer();
@@ -31,7 +33,7 @@ public:
     bool aDesQuestions() const;
 
     // Retourne la question courante
-    euestion* questionCourante() const;
+    question* questionCourante() const;
 
     // Soumettre la réponse de l'utilisateur
     bool repondre(const std::string& reponseUtilisateur);
