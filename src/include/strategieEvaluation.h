@@ -9,9 +9,15 @@
  devront implémenter ces méthodes.
 */
 
+<<<<<<< HEAD
 class StrategieEvaluation {
 public:
     virtual ~StrategieEvaluation() {}
+=======
+class strategieEvaluation {
+public:
+    virtual ~strategieEvaluation() {}
+>>>>>>> b93cf47 ( ajout de la classe evaluationTest)
 
     // Initialiser la stratégie avec le nombre total de questions
     virtual void init(int nombreQuestions) = 0;

@@ -8,7 +8,11 @@
  - une évaluation est toujours faite à partir d'un questionnaire
  - et utilise une stratégie d'évaluation
 */
+<<<<<<< HEAD
 Evaluation::Evaluation(Questionnaire* q, StrategieEvaluation* s)
+=======
+Evaluation::Evaluation(Questionnaire* q, strategieEvaluation* s)
+>>>>>>> b93cf47 ( ajout de la classe evaluationTest)
     : questionnaire(q),
       strategie(s),
       nombreEssais(0),
@@ -21,7 +25,11 @@ Evaluation::Evaluation(Questionnaire* q, StrategieEvaluation* s)
  Démarre l'évaluation.
  Initialise la stratégie avec le nombre de questions du questionnaire.
 */
+<<<<<<< HEAD
 void Evaluation::commencer() {
+=======
+void evaluation::commencer() {
+>>>>>>> b93cf47 ( ajout de la classe evaluationTest)
     if (!questionnaire || !strategie) {
         std::cout << "Erreur : évaluation mal initialisée.\n";
         return;
