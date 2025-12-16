@@ -1,8 +1,8 @@
 #include "QuestionChoixMultiple.h"
 #include <stdexcept>
 
-questionChoixMultiple::questionChoixMultiple(const std::string& intitule,const std::string& texte,const std::vector<std::string>& options,int correct)
-    : question(intitule,texte), d_options{options}, d_bonneReponse{correct} {}
+questionChoixMultiple::questionChoixMultiple(const std::string& intitule,const std::vector<std::string>& options,int correct)
+    : question(intitule), d_options{options}, d_bonneReponse{correct} {}
 
 bool questionChoixMultiple::estBonneReponse(const std::string& reponse) const
 {
