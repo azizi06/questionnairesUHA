@@ -1,44 +1,35 @@
-#include "Affichage.h"
+#include "affichage.h"
 #include <iostream>
-#include <cstdlib> // system
+#include <cstdlib>
 #include "goto_xy_windows.h"
 
 using namespace std;
 
-void Affichage::nettoyerCMD()
-{
+void affichage::clearCMD(){
     system("cls");
 }
 
-void Affichage::afficherTitre(const string& titre)
-{
-    goto_xy(5, 1);
-    cout << "============================================";
+void affichage::afficherTitre(const string& titre){
     goto_xy(5, 2);
     cout << titre;
-    goto_xy(5, 3);
-    cout << "============================================";
 }
 
-void Affichage::afficherQuestion(const string& intitule)
-{
+void affichage::afficherQuestion(const string& intitule){
     goto_xy(5, 6);
     cout << "Question :";
     goto_xy(5, 7);
     cout << intitule;
 }
 
-void Affichage::afficherReponse(const string& reponse)
-{
+void affichage::afficherReponse(const string& reponse){
     goto_xy(5, 9);
     cout << "Reponse :";
     goto_xy(5, 10);
     cout << reponse;
 }
 
-void Affichage::afficherMessage(const string& msg)
-{
+void affichage::afficherMessage(const string& message){
     goto_xy(5, 13);
-    cout << msg;
+    cout << message;
 }
 
