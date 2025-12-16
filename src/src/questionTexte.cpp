@@ -1,6 +1,6 @@
 #include "questionTexte.h"
 
-questionTexte::questionTexte(const std::string& intitule,const std::string& texte,const std::string& reponse)
+questionTexte::questionTexte(const std::string& intitule,const std::string& reponse)
     : question(intitule), d_reponse{reponse} {}
 
 bool questionTexte::estBonneReponse(const std::string& reponse) const
