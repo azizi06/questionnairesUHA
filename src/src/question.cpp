@@ -1,7 +1,5 @@
 #include "question.h"
 
-<<<<<<< HEAD
-=======
 question::question(const std::string& intitule, const std::string& texte)
     : d_intitule{intitule}, d_texte{texte} {}
 
