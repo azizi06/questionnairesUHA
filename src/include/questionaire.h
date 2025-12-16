@@ -12,17 +12,17 @@
 #include "question.h"
 #include<vector>
 #include<memory>
-
+#include<string>
 class questionaire
 {
     public:
         questionaire();
         virtual ~questionaire();
-        
-        
-        
-        
-        private:
+        std::string titre() const;
+        void add(std::unique_ptr<question> question);
+        const question getQuestionNumero(int i)const;
+    private:
+        std::string d_titre;
         std::vector<std::unique_ptr<question>> d_questions;
 };
 
