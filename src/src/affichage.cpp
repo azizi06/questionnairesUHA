@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void Affichage::nettoyer()
+void Affichage::nettoyerCMD()
 {
     system("cls");
 }
