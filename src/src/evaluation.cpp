@@ -4,56 +4,48 @@
 #include <iostream>
 
 /*
- Constructeur :
  - une évaluation est toujours faite à partir d'un questionnaire
  - et utilise une stratégie d'évaluation
 */
-<<<<<<< HEAD
-Evaluation::Evaluation(Questionnaire* q, StrategieEvaluation* s)
-=======
-Evaluation::Evaluation(Questionnaire* q, strategieEvaluation* s)
->>>>>>> b93cf47 ( ajout de la classe evaluationTest)
-    : questionnaire(q),
-      strategie(s),
-      nombreEssais(0),
-      nombreBonnesReponses(0),
-      indiceQuestionCourante(-1)
+
+
+evaluation::evaluation(questionnaire* questionnaire, strategieEvaluation* strategie)
+    : d_questionnaire{questionaire},
+      d_strategie{strategie},
+      d_nombreEssais{0},
+      d_nombreBonnesReponses{0},
+      d_indiceQuestionCourante{-1}
 {
 }
 
 /*
- Démarre l'évaluation.
  Initialise la stratégie avec le nombre de questions du questionnaire.
 */
-<<<<<<< HEAD
-void Evaluation::commencer() {
-=======
+
 void evaluation::commencer() {
->>>>>>> b93cf47 ( ajout de la classe evaluationTest)
-    if (!questionnaire || !strategie) {
+
+    if (!d_questionnaire || !d_strategie) {
         std::cout << "Erreur : évaluation mal initialisée.\n";
         return;
     }
 
-    strategie->init(questionnaire->taille());
+    d_strategie->init(d_questionnaire->taille());
     questionSuivante();
 }
 
 /*
  Indique s'il reste des questions à poser
 */
-bool Evaluation::aDesQuestions() const {
-    return strategie->aDesQuestions();
+bool evaluation::aDesQuestions() const {
+    return d_strategie->aDesQuestions();
 }
 
-/*
- Retourne la question courante
-*/
-Question* Evaluation::questionCourante() const {
-    if (indiceQuestionCourante < 0) {
+
+Question* evaluation::questionCourante() const {
+    if (d_indiceQuestionCourante < 0) {
         return nullptr;
     }
-    return questionnaire->getQuestion(indiceQuestionCourante);
+    return d_questionnaire->getQuestion(indiceQuestionCourante);
 }
 
 /*
@@ -62,54 +54,49 @@ Question* Evaluation::questionCourante() const {
  - informe la stratégie
  - met à jour les compteurs
 */
-bool Evaluation::repondre(const std::string& reponseUtilisateur) {
-    Question* q = questionCourante();
-    if (!q) {
+bool evaluation::repondre(const std::string& reponseUtilisateur) {
+    question* question = questionCourante();
+    if (!question) {
         return false;
     }
 
-    nombreEssais++;
+    d_nombreEssais++;
 
-    bool correcte = q->estBonneReponse(reponseUtilisateur);
+    bool correcte = question->estBonneReponse(reponseUtilisateur);
 
     if (correcte) {
-        nombreBonnesReponses++;
+        d_nombreBonnesReponses++;
     }
 
     // informer la stratégie du résultat
-    strategie->soumettreReponse(indiceQuestionCourante, correcte);
+    d_strategie->soumettreReponse(indiceQuestionCourante, correcte);
 
     return correcte;
 }
 
 /*
- Indique si la correction peut être affichée
  (dépend de la stratégie)
 */
-bool Evaluation::peutAfficherCorrection() const {
-    return strategie->peutAfficherCorrection(indiceQuestionCourante);
+bool evaluation::peutAfficherCorrection() const {
+    return d_strategie->peutAfficherCorrection(indiceQuestionCourante);
 }
 
-/*
- Passer à la question suivante
-*/
-void Evaluation::questionSuivante() {
-    if (strategie->aDesQuestions()) {
-        indiceQuestionCourante = strategie->questionSuivante();
+
+void evaluation::questionSuivante() {
+    if (d_strategie->aDesQuestions()) {
+        d_indiceQuestionCourante = d_strategie->questionSuivante();
     }
 }
 
-/*
- Affiche les résultats finaux de l'évaluation
-*/
-void Evaluation::afficherResultats() const {
-    std::cout << "\n=== Résultats de l'évaluation ===\n";
-    std::cout << "Nombre de questions : " << questionnaire->taille() << "\n";
-    std::cout << "Nombre d'essais     : " << nombreEssais << "\n";
-    std::cout << "Bonnes réponses     : " << nombreBonnesReponses << "\n";
 
-    if (questionnaire->taille() > 0) {
-        int score = (nombreBonnesReponses * 100) / questionnaire->taille();
+void evaluation::afficherResultats() const {
+    std::cout << "\n=== Résultats de l'évaluation ===\n";
+    std::cout << "Nombre de questions : " << d_questionnaire->taille() << "\n";
+    std::cout << "Nombre d'essais     : " << d_nombreEssais << "\n";
+    std::cout << "Bonnes réponses     : " << d_nombreBonnesReponses << "\n";
+
+    if (d_questionnaire->taille() > 0) {
+        int score = (d_nombreBonnesReponses * 100) / d_questionnaire->taille();
         std::cout << "Score final         : " << score << " %\n";
     }
 }
