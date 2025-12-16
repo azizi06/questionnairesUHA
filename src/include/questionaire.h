@@ -9,16 +9,21 @@
 #define QN 'QN' // question numérique
 #define QC 'QC' // question choix multiple
 #define SEPARATEUR ','
+#include "question.h"
+#include<vector>
+#include<memory>
 
 class questionaire
 {
     public:
         questionaire();
         virtual ~questionaire();
-
-    protected:
-
-    private:
+        
+        
+        
+        
+        private:
+        std::vector<std::unique_ptr<question>> d_questions;
 };
 
 #endif // QUESTIONAIRE_H
