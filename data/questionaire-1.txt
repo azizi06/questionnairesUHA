@@ -1,0 +1,16 @@
+# questionaires informations génerales
+{
+    [QT]
+    [L'eau bout toujours à 100 degrés Celsius ?]
+    [vrai]
+}
+{
+    [QN]
+    [c est quoi le nombre des ballons d'or obtenue par cristiano ronaldo ?]
+    [5]
+}
+{
+    [QC]
+    [c est quoi la plus grande ville?]
+    [paris,pekin,tokyo,newYork]
+}
