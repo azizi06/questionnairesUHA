@@ -1,8 +1,8 @@
 #include "questionNumerique.h"
 #include <stdexcept>
 
-questionNumerique::questionNumerique(const std::string& intitule,const std::string& texte,int reponse,int valeurMin,int valeurMax):
-    question(intitule, texte), d_reponse{reponse}, d_valeurMin{valeurMin}, d_valeurMax{valeurMax} {}
+questionNumerique::questionNumerique(const std::string& intitule,int reponse,int valeurMin,int valeurMax):
+    question(intitule, d_reponse{reponse}, d_valeurMin{valeurMin}, d_valeurMax{valeurMax} {}
 
 bool questionNumerique::estBonneReponse(const std::string& reponse) const {
     try {
