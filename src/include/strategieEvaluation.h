@@ -9,7 +9,7 @@
  devront implémenter ces méthodes.
 */
 
-<<<<<<< HEAD
+
 class StrategieEvaluation {
 public:
     virtual ~StrategieEvaluation() {}
