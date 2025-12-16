@@ -45,7 +45,7 @@ Question* evaluation::questionCourante() const {
     if (d_indiceQuestionCourante < 0) {
         return nullptr;
     }
-    return d_questionnaire->getQuestion(indiceQuestionCourante);
+    return d_questionnaire->getQuestionNumero(indiceQuestionCourante);
 }
 
 /*
