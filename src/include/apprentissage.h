@@ -1,16 +1,18 @@
 #ifndef APPRENTISSAGE_H
 #define APPRENTISSAGE_H
 
+#include "Questionnaire.h"
+#include "Affichage.h"
 
 class Apprentissage
 {
-    public:
-        Apprentissage();
-        virtual ~Apprentissage();
+private:
+    const Questionnaire& d_questionnaire;
+    Affichage d_affichage;
 
-    protected:
-
-    private:
+public:
+    Apprentissage(const Questionnaire& questionnaire);
+    void demarrer() const;
 };
 
-#endif // APPRENTISSAGE_H
+#endif
