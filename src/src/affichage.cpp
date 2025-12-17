@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cstdlib>
 #include "goto_xy_windows.h"
-
 using namespace std;
 
 void affichage::clearCMD(){
