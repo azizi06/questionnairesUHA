@@ -18,13 +18,12 @@ class questionairIeIterator
         const questionaire& d_questionaire;
 
 
-    
 };
 
 /*questionairIeIterator qit{questionaire};
 while (qit.hasNext())
 {
-    std::uniq_ptr<question> question = qit.getNext() 
+    std::uniq_ptr<question> question = qit.getNext()
 
 }
 **/
