@@ -10,7 +10,7 @@ void apprentissage::apprendre() const {
     while (iterateur.hasNext()) {
         const question& q = iterateur.next();
 
-        d_affichage.nettoyerCMD();
+        d_affichage.clearCMD();
         d_affichage.afficherTitre("Vous etes dans le mode apprentissage");
 
         d_affichage.afficherQuestion(q.Intitule());
