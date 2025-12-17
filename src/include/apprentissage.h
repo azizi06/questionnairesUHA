@@ -1,18 +1,20 @@
 #ifndef APPRENTISSAGE_H
 #define APPRENTISSAGE_H
 
-#include "questionnaire.h"
+#include "questionaire.h"
+#include "questionairIeIterator.h"
 #include "affichage.h"
 
-class apprentissage{
+class apprentissage {
 
-    public:
-       apprentissage(const questionnaire& questionnaire);
-       void apprendre() const;
+public:
+    apprentissage(const questionaire& questionaire);
+    void apprendre() const;
 
-    private:
-       const questionnaire& d_questionnaire; // On utilise le questionnaire mais ne le modifie pas
-       affichage d_affichage;
+private:
+    const questionaire& d_questionaire; //on utilise le questionnaire mais on ne le modifie pas
+    affichage d_affichage;
+
 };
 
 #endif
