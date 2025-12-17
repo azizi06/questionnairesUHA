@@ -21,6 +21,7 @@ class questionaire
         std::string titre() const;
         void add(std::unique_ptr<question> question);
         const question getQuestionNumero(int i)const;
+        int taille() const;
     private:
         std::string d_titre;
         std::vector<std::unique_ptr<question>> d_questions;

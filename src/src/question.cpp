@@ -12,4 +12,4 @@ std::string question::Texte() const
 {
     return d_texte;
 }
->>>>>>> feature/classes-questions
+
