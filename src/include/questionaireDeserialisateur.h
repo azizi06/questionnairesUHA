@@ -1,18 +1,21 @@
 #ifndef QUESTIONAIRESERIALISATEUR_H
 #define QUESTIONAIRESERIALISATEUR_H
 #include<string>
+#include"questionaire.h"
+#include"question.h"
+#include"questionTexte.h"
+#include"questionNumerique.h"
+#include"questionChoixMultiple.h"
 
 class questionaireDeserialisateur
 {
     public:
         questionaireDeserialisateur();
         virtual ~questionaireDeserialisateur();
-        questionaire lire(const std::string &nomFichier);\
-        void lireQuestion(const question &q);
-        questionTexte lireQuestionTexte(const questionTexte &qt);
-        questionTexte lireQuestionNumerique(const questionNumerique &qn);
-        questionChoixMultiple lireQuestionChoixMultiple(const questionChoixMultiple &qc);
-
+        virtual questionaire lire(const std::string &nomFichier)=0;
+        virtual questionTexte lireQuestionTexte()=0;
+        virtual questionTexte lireQuestionNumerique()=0;
+        virtual questionChoixMultiple lireQuestionChoixMultiple()=0;
 
     private:
 };
