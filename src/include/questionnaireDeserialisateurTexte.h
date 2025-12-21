@@ -7,24 +7,22 @@
 class questionnaireDeserialisateurTexte : public  questionnaireDeserialisateur
 {
     public:
-        questionnaireDeserialisateurTexte(ifstream &ifs);
-        virtual ~questionnaireDeserialisateurTexte();
+        questionnaireDeserialisateurTexte(std::ifstream &ifs);
         questionnaire lire() override;
-        question lireQuestionTexte() override;
         questionTexte lireQuestionTexte() override;
-        questionTexte lireQuestionNumerique() override;
-        questionChoixMultiple lireQuestionChoixMultiple override;
-
+        questionNumerique lireQuestionNumerique() override;
+        questionChoixMultiple lireQuestionChoixMultiple() override;
     private:
-        ifstream &ifs;
+        std::ifstream &ifs;
         /*
         retourne le type d'objet
         QN -> pour question numerique
         QT -> pour question text
         QC -> pour question ChoixsMultiple
         **/
-        string determinerTypeObjet()
-
+        std::string determinerTypeObjet();
+        // lire des phrase ex : [phrase]
+        std::string lireString();
 };
 
 #endif // QUESTIONAIREDESERIALISATEURTEXTE_H
