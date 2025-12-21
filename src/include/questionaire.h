@@ -17,8 +17,8 @@ class questionaire
 {
     public:
         questionaire();
-        virtual ~questionaire();
         std::string titre() const;
+        void setTitre(const std::string& titre);
         void add(std::unique_ptr<question> question);
         const question getQuestionNumero(int i)const;
         int taille() const;

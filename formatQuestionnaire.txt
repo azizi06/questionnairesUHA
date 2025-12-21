@@ -1,16 +1,16 @@
-# titre questionaires
-{
-    [QT] //question texte
+#[titre questionaires]
+QT{
+    //question texte
     [intitulé question]
     [reponse texte]
 }
-{
-    [QN] //question numerique
+QN{
+    //question numerique
     [intitulé question]
     [reponse numerique]
 }
-{
-    [QC] //question choix multiple
+QC{
+    //question choix multiple
     [intitulé question]
     [choix1,choix2,choix3,choix4]
 }
