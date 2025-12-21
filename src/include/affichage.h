@@ -2,13 +2,13 @@
 #define AFFICHAGE_H
 #include <string>
 
-class Affichage{
+class affichage{
 public:
-    void clearCMD();
-    void afficherTitre(const std::string& titre);
-    void afficherQuestion(const std::string& intitule);
-    void afficherReponse(const std::string& reponse);
-    void afficherMessage(const std::string& message);
+    void clearCMD() const;
+    void afficherTitre(const std::string& titre) const;
+    void afficherQuestion(const std::string& intitule) const;
+    void afficherReponse(const std::string& reponse) const;
+    void afficherMessage(const std::string& message) const;
 };
 
 #endif

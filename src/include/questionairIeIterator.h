@@ -2,12 +2,14 @@
 #define QUESTIONAIRIEITERATOR_H
 
 #include"question.h"
+#include"questionaire.h"
 class questionairIeIterator
 {
     public:
         questionairIeIterator(const questionaire& quest);
         virtual ~questionairIeIterator();
-        const question& next();
+        const question* next();
+        bool hasNext();
 
 
 

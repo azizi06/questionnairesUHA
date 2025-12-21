@@ -2,9 +2,9 @@
 #define EVALUATION_H
 
 #include <string>
-
-#include "questionnaire.h"
-#include "strategieEvaluation.h"
+#include "../include/evaluation.h"
+#include "../include/strategieEvaluation.h"
+#include"questionaire.h"
 
 /*
  Classe evaluation :

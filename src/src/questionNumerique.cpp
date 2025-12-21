@@ -1,4 +1,4 @@
-#include "questionNumerique.h"
+#include "../include/questionNumerique.h"
 #include <stdexcept>
 
 questionNumerique::questionNumerique(const std::string& intitule,int reponse,int valeurMin,int valeurMax):
