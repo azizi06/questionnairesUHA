@@ -1,22 +1,11 @@
-#ifndef QUESTION_H
-#define QUESTION_H
+#include "../include/question.h"
 
-#include <string>
+question::question(const std::string& intitule)
 
-class question {
-private:
-    std::string d_intitule;
+    : d_intitule{intitule} {}
 
-public:
-    question(const std::string& intitule);
-    virtual ~question() = default;
-    std::string Intitule() const;
-    
-    virtual bool estBonneReponse(const std::string& reponse) const =0;
-    virtual std::string getReponseCorrecte() const =0;
-};
-
-#endif
-
-
+std::string question::Intitule() const
+{
+    return d_intitule;
+}
 

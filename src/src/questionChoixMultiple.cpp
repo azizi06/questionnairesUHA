@@ -1,4 +1,4 @@
-#include "QuestionChoixMultiple.h"
+#include "../include/questionChoixMultiple.h"
 #include <stdexcept>
 
 questionChoixMultiple::questionChoixMultiple(const std::string& intitule,const std::vector<std::string>& options,int correct)

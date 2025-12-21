@@ -1,5 +1,5 @@
-#include "evaluation.h"
-#include "strategieEvaluation.h"
+#include "../include/evaluation.h"
+
 
 #include <iostream>
 

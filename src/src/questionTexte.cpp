@@ -1,4 +1,4 @@
-#include "questionTexte.h"
+#include "../include/questionTexte.h"
 
 questionTexte::questionTexte(const std::string& intitule,const std::string& reponse)
     : question(intitule), d_reponse{reponse} {}
