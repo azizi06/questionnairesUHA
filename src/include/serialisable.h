@@ -1,12 +1,12 @@
 #ifndef SERIALISABLE_H
 #define SERIALISABLE_H
-#include"questionaireSerialisateur.h"
+#include"questionnaireSerialisateur.h"
 
 class serialisable
 {
     public:
         serialisable();
-        virtual ~serialisable(questionaireSerialisateur* qs);
+        virtual ~serialisable(questionnaireSerialisateur* qs);
         virtual void ecrire()=0;
 }
 

@@ -4,13 +4,13 @@
 #include <string>
 #include "../include/evaluation.h"
 #include "../include/strategieEvaluation.h"
-#include"questionaire.h"
+#include"questionnaire.h"
 
 /*
  Classe evaluation :
- - gère le déroulement d'une évaluation
- - utilise une stratégie d'évaluation
- - calcule les résultats
+ - gï¿½re le dï¿½roulement d'une ï¿½valuation
+ - utilise une stratï¿½gie d'ï¿½valuation
+ - calcule les rï¿½sultats
 */
 
 class evaluation {
@@ -23,10 +23,10 @@ private:
     int indiceQuestionCourante;
 
 public:
-    // Constructeur : une évaluation est faite à partir d'un questionnaire
+    // Constructeur : une ï¿½valuation est faite ï¿½ partir d'un questionnaire
     evaluation(questionnaire* q, strategieEvaluation* s);
 
-    // Démarrer l'évaluation
+    // Dï¿½marrer l'ï¿½valuation
     void commencer();
 
     // Indique s'il reste des questions
@@ -35,16 +35,16 @@ public:
     // Retourne la question courante
     question* questionCourante() const;
 
-    // Soumettre la réponse de l'utilisateur
+    // Soumettre la rï¿½ponse de l'utilisateur
     bool repondre(const std::string& reponseUtilisateur);
 
-    // Indique si on peut afficher la bonne réponse
+    // Indique si on peut afficher la bonne rï¿½ponse
     bool peutAfficherCorrection() const;
 
-    // Passer à la question suivante
+    // Passer ï¿½ la question suivante
     void questionSuivante();
 
-    // Afficher les résultats finaux
+    // Afficher les rï¿½sultats finaux
     void afficherResultats() const;
 };
 

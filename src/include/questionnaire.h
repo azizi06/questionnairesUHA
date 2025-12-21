@@ -13,10 +13,10 @@
 #include<vector>
 #include<memory>
 #include<string>
-class questionaire
+class questionnaire
 {
     public:
-        questionaire();
+        questionnaire();
         std::string titre() const;
         void setTitre(const std::string& titre);
         void add(std::unique_ptr<question> question);

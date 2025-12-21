@@ -1,6 +1,6 @@
-#include "../include/questionaire.h"
+#include "../include/questionnaire.h"
 
-questionaire::questionaire():d_titre{},d_questions{}
+questionnaire::questionnaire():d_titre{},d_questions{}
 {}
 
 std::string titre() const{

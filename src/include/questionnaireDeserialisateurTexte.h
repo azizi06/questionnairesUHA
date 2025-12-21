@@ -1,15 +1,15 @@
 #ifndef QUESTIONAIREDESERIALISATEURTEXTE_H
 #define QUESTIONAIREDESERIALISATEURTEXTE_H
 #include<iostream>
-#include"questionaire.h"
-#include"questionaireDeserialisateur.h"
+#include"questionnaire.h"
+#include"questionnaireDeserialisateur.h"
 
-class questionaireDeserialisateurTexte : public  questionaireDeserialisateur
+class questionnaireDeserialisateurTexte : public  questionnaireDeserialisateur
 {
     public:
-        questionaireDeserialisateurTexte(ifstream &ifs);
-        virtual ~questionaireDeserialisateurTexte();
-        questionaire lire() override;
+        questionnaireDeserialisateurTexte(ifstream &ifs);
+        virtual ~questionnaireDeserialisateurTexte();
+        questionnaire lire() override;
         question lireQuestionTexte() override;
         questionTexte lireQuestionTexte() override;
         questionTexte lireQuestionNumerique() override;

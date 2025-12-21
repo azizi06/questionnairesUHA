@@ -1,14 +1,14 @@
 #ifndef QUESTIONAIRESERIALISATEURTEXTE_H
 #define QUESTIONAIRESERIALISATEURTEXTE_H
-#include"questionaireSerialisateur.h"
+#include"questionnaireSerialisateur.h"
 
-class questionaireSerialisateurTexte : public questionaireSerialisateur
+class questionnaireSerialisateurTexte : public questionnaireSerialisateur
 {
     public:
-        questionaireSerialisateurTexte();
-        virtual ~questionaireSerialisateurTexte();
+        questionnaireSerialisateurTexte();
+        virtual ~questionnaireSerialisateurTexte();
 
-        void ecrire(const questionaire &quest,const std::string &nomQuestionaire) override;
+        void ecrire(const questionnaire &quest,const std::string &nomQUESTIONAIRE) override;
         void ecrireQuestion(const question &q) override;
         void ecrireQuestionTexte(const questionTexte &qt) override;
         void ecrireQuestionNumerique(const questionTexte &qn) override;

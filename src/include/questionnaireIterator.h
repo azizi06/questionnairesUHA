@@ -2,11 +2,11 @@
 #define QUESTIONAIRIEITERATOR_H
 
 #include"question.h"
-#include"questionaire.h"
+#include"questionnaire.h"
 class questionairIeIterator
 {
     public:
-        questionairIeIterator(const questionaire& quest);
+        questionairIeIterator(const questionnaire& quest);
         virtual ~questionairIeIterator();
         const question* next();
         bool hasNext();
@@ -17,12 +17,12 @@ class questionairIeIterator
 
     private:
         int d_current;
-        const questionaire& d_questionaire;
+        const questionnaire& d_questionnaire;
 
 
 };
 
-/*questionairIeIterator qit{questionaire};
+/*questionairIeIterator qit{questionnaire};
 while (qit.hasNext())
 {
     std::uniq_ptr<question> question = qit.getNext()

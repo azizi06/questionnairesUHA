@@ -3,12 +3,12 @@
 #include"../include/questionairIeIterator.h"
 
 
-apprentissage::apprentissage(const questionaire& questionaire): d_questionaire(questionaire)
+apprentissage::apprentissage(const questionnaire& questionnaire): d_questionnaire(questionnaire)
 {}
 
 void apprentissage::apprendre() const {
 
-    questionairIeIterator iterateur{d_questionaire};
+    questionairIeIterator iterateur{d_questionnaire};
       while (iterateur.hasNext()) { //Methode qui sera definie dans le code de Azizi
          const question* q = iterateur.next(); //Methode qui sera definie dans le code de Azizi
 

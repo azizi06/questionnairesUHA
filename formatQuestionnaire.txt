@@ -1,4 +1,4 @@
-#[titre questionaires]
+#[titre questionnaires]
 QT{
     //question texte
     [intitulé question]
