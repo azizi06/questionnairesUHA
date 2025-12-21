@@ -1,11 +1,2 @@
-#include "../include/questionairIeIterator.h"
+#include "../include/questionnaireIterator.h"
 
-questionairIeIterator::questionairIeIterator()
-{
-    //ctor
-}
-
-questionairIeIterator::~questionairIeIterator()
-{
-    //dtor
-}

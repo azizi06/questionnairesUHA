@@ -1,4 +1,4 @@
-#include "questionnaireSerialisateurTexte.h"
+#include "../include/questionnaireSerialisateurTexte.h"
 
 questionnaireSerialisateurTexte::questionnaireSerialisateurTexte()
 {

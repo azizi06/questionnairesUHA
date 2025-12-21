@@ -1,5 +1,5 @@
-#ifndef QUESTIONAIRE_H
-#define QUESTIONAIRE_H
+#ifndef QUESTIONNAIRE_H
+#define QUESTIONNAIRE_H
 
 #define DEBUTQUESTION '{'
 #define FINQUESTION '}'
@@ -9,6 +9,7 @@
 #define QN 'QN' // question numérique
 #define QC 'QC' // question choix multiple
 #define SEPARATEUR ','
+
 #include "question.h"
 #include<vector>
 #include<memory>
@@ -27,4 +28,4 @@ class questionnaire
         std::vector<std::unique_ptr<question>> d_questions;
 };
 
-#endif // QUESTIONAIRE_H
+#endif

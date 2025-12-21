@@ -1,6 +1,6 @@
 #include "../include/apprentissage.h"
 #include <conio.h>
-#include"../include/questionairIeIterator.h"
+#include"../include/questionnaireIterator.h"
 
 
 apprentissage::apprentissage(const questionnaire& questionnaire): d_questionnaire(questionnaire)
@@ -8,7 +8,7 @@ apprentissage::apprentissage(const questionnaire& questionnaire): d_questionnair
 
 void apprentissage::apprendre() const {
 
-    questionairIeIterator iterateur{d_questionnaire};
+    questionnaireIterator iterateur{d_questionnaire};
       while (iterateur.hasNext()) { //Methode qui sera definie dans le code de Azizi
          const question* q = iterateur.next(); //Methode qui sera definie dans le code de Azizi
 

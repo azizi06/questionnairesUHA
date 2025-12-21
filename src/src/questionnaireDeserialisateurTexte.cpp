@@ -1,11 +1,3 @@
-#include "questionnaireDeserialisateurTexte.h"
+#include "../include/questionnaireDeserialisateur.h"
 
-questionnaireDeserialisateurTexte::questionnaireDeserialisateurTexte()
-{
-    //ctor
-}
 
-questionnaireDeserialisateurTexte::~questionnaireDeserialisateurTexte()
-{
-    //dtor
-}
