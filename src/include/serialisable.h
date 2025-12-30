@@ -6,8 +6,8 @@ class serialisable
 {
     public:
         serialisable();
-        virtual ~serialisable(questionnaireSerialisateur* qs);
-        virtual void ecrire()=0;
+        virtual ~serialisable();
+        virtual void ecrire(questionnaireSerialisateur* qs)=0;
 }
 
 #endif // SERIALISABLE_H

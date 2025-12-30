@@ -10,14 +10,12 @@
 class questionnaireDeserialisateur
 {
     public:
-        questionnaireDeserialisateur();
+        questionnaireDeserialisateur()=default;
         virtual ~questionnaireDeserialisateur()=default;
         virtual questionnaire lire()=0;
         virtual questionTexte lireQuestionTexte()=0;
-        virtual questionTexte lireQuestionNumerique()=0;
+        virtual questionNumerique lireQuestionNumerique()=0;
         virtual questionChoixMultiple lireQuestionChoixMultiple()=0;
-
-    private:
 };
 
 #endif //QUESTIONAIRESERIALISATEUR_H
