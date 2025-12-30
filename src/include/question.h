@@ -6,12 +6,19 @@
 class question {
 private:
     std::string d_intitule;
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/feature/classes-questions
 
 public:
     question(const std::string& intitule);
     virtual ~question() = default;
     std::string Intitule() const;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/feature/classes-questions
     virtual bool estBonneReponse(const std::string& reponse) const =0;
     virtual std::string getReponseCorrecte() const =0;
 };
