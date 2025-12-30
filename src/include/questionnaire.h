@@ -5,9 +5,9 @@
 #define FINQUESTION '}'
 #define DEBUTTEXT '['
 #define FINTEXT ']'
-#define QT 'QT' // question texte
-#define QN 'QN' // question numérique
-#define QC 'QC' // question choix multiple
+#define QT "QT" // question texte
+#define QN "QN" // question numérique
+#define QC "QC" // question choix multiple
 #define SEPARATEUR ','
 
 #include "question.h"
