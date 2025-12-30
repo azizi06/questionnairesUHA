@@ -1,30 +1,24 @@
-
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-// Inclusions de TES classes
+#include "../include/strategies.h"
 
-#include "strategies.h"
-#include "questionnaire.h"
-#include "question.h"
-#include "evaluation.h"
 #include <vector>
 #include <string>
 
-
-TEST_CASE("1. Test des Stratégies ") {
+TEST_CASE("1. Test des Stratégies") {
 
     SUBCASE("Stratégie TEST : Avance toujours") {
         StrategieTest strat;
         strat.init(2); // 2 questions simulées
 
-        CHECK(strat.aDesQuestions() == true);
-        CHECK(strat.questionSuivante() == 0); // Q1
+        REQUIRE(strat.aDesQuestions() == true);
+        REQUIRE(strat.questionSuivante() == 0);
+        strat.soumettreReponse(0, false);
+        REQUIRE(strat.questionSuivante() == 1);
 
-        strat.soumettreReponse(0, false); // Faux
-        CHECK(strat.questionSuivante() == 1); // Passe quand même à Q2
 
-        CHECK(strat.peutAfficherCorrection(0) == false); // Jamais de correction
+        REQUIRE(strat.peutAfficherCorrection(0) == false);
     }
 
     SUBCASE("Stratégie SECONDE CHANCE : Logique de répétition") {
@@ -32,38 +26,38 @@ TEST_CASE("1. Test des Stratégies ") {
         strat.init(5);
 
         // Premier essai raté sur la question 0
-        CHECK(strat.questionSuivante() == 0);
+        REQUIRE(strat.questionSuivante() == 0);
         strat.soumettreReponse(0, false);
 
         // Doit redonner la question 0 (index ne bouge pas)
-        CHECK(strat.questionSuivante() == 0);
-        CHECK(strat.peutAfficherCorrection(0) == false); // Pas d'aide au 2eme essai
+        REQUIRE(strat.questionSuivante() == 0);
+        REQUIRE(strat.peutAfficherCorrection(0) == false);
 
         // Deuxième essai raté
         strat.soumettreReponse(0, false);
 
-        // Là on avance à la question 1
-        CHECK(strat.questionSuivante() == 1);
-        CHECK(strat.peutAfficherCorrection(0) == true); // On affiche la correction
+
+        REQUIRE(strat.questionSuivante() == 1);
+        // On affiche la correction car on a raté 2 fois
+        REQUIRE(strat.peutAfficherCorrection(0) == true);
     }
 
     SUBCASE("Stratégie ADAPTATIVE : Réinsertion") {
         StrategieAdaptative strat;
-        strat.init(1); // 1 seule question pour tester la boucle
+        strat.init(1);
 
         int id = strat.questionSuivante();
 
-        // On se trompe
         strat.soumettreReponse(id, false);
 
         // Comme c'est raté, elle doit être toujours dispo (remise à la fin)
-        CHECK(strat.aDesQuestions() == true);
+        REQUIRE(strat.aDesQuestions() == true);
 
-        // On la réussit
+
         int id2 = strat.questionSuivante();
         strat.soumettreReponse(id2, true);
 
-        // Maintenant c'est fini
-        CHECK(strat.aDesQuestions() == false);
+
+        REQUIRE(strat.aDesQuestions() == false);
     }
 }
