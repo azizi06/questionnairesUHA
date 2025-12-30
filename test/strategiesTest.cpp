@@ -3,9 +3,11 @@
 #include "doctest.h"
 
 // Inclusions de TES classes
-#include "evaluation.h"
-#include "strategies.h"
 
+#include "strategies.h"
+#include "questionnaire.h"
+#include "question.h"
+#include "evaluation.h"
 #include <vector>
 #include <string>
 
