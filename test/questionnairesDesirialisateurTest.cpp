@@ -1,4 +1,4 @@
-#include"doctest.h"
+#include"./include/doctest.h"
 #include "../src/include/questionnaireDeserialisateurTexte.h"
 #include <sstream>
 #include <stdexcept>
@@ -15,7 +15,14 @@ TEST_CASE("[questionnaireDeserialisateurTexte] methodes de la classe fonctionne"
         questionnaireDeserialisateurTexte deserialisateur(iss);
         REQUIRE_EQ(deserialisateur.lireString(), "");
     }
-
+    SUBCASE("trim() - fonctione") {
+        std::string input = "paris,mulhouse,basel,lyon";
+        std::istringstream iss(input);
+        questionnaireDeserialisateurTexte deserialisateur(iss);
+        std::vector<std::string>  villes= {"paris","mulhouse","basel","lyon"};
+        REQUIRE_EQ(villes.size(),4);
+        REQUIRE_EQ(villes,deserialisateur.trim(input,SEPARATEUR));
+    }
 
 }
 TEST_CASE("questions sont lit correctement"){
@@ -46,6 +53,12 @@ TEST_CASE("questions sont lit correctement"){
         REQUIRE_EQ(q.getReponseCorrecte(), "12");
     }
     SUBCASE("question choix multiple est lit correctement"){
+        std::string input = "{\n[Quelle est la capitale de la France?]\n[Paris,Londres,Berlin,Madrid]\n[1]\n}\n";
+        std::istringstream iss(input);
+        questionnaireDeserialisateurTexte deserialisateur(iss);
 
+        questionChoixMultiple q = deserialisateur.lireQuestionChoixMultiple();
+        REQUIRE_EQ(q.Intitule(),"Quelle est la capitale de la France?");
+        REQUIRE_EQ(q.getReponseCorrecte(),"1");
     }
 }

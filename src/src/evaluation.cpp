@@ -55,7 +55,7 @@ Question* Evaluation::questionCourante() const {
  - met à jour les compteurs
 */
 bool Evaluation::repondre(const std::string& reponseUtilisateur) {
-    Question* q = questionCourante();
+    question* q = questionCourante();
     if (!q) {
         return false;
     }
