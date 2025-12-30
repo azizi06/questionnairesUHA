@@ -1,15 +1,20 @@
 #[titre questionnaires]
-QT{
+QT
+{
     //question texte
     [intitulé question]
     [reponse texte]
 }
-QN{
+QN
+{
     //question numerique
     [intitulé question]
     [reponse numerique]
+    [valeur min]
+    [valeur max]
 }
-QC{
+QC
+{
     //question choix multiple
     [intitulé question]
     [choix1,choix2,choix3,choix4]
