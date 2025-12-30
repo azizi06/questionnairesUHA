@@ -2,7 +2,6 @@
 #define APPRENTISSAGE_H
 
 #include "questionnaire.h"
-#include "questionnaireIterator.h"
 #include "affichage.h"
 
 class apprentissage {
