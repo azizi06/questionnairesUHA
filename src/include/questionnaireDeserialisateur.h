@@ -10,7 +10,7 @@
 class questionnaireDeserialisateur
 {
     public:
-        questionnaireDeserialisateur();
+        questionnaireDeserialisateur()=default;
         virtual ~questionnaireDeserialisateur()=default;
         virtual questionnaire lire()=0;
         virtual questionTexte lireQuestionTexte()=0;
