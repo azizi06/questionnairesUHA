@@ -1,32 +1,50 @@
 #include "../include/affichage.h"
+#include "../include/goto_xy_windows.h"
 #include <iostream>
 #include <cstdlib>
-#include "../include/goto_xy_windows.h"
+
 using namespace std;
 
-void affichage::clearCMD()const{
+void affichage::clearCMD() const {
     system("cls");
 }
-//les coordonnees seront modifiees plus tard pour ameliorer l'affichage,
-// Aucune vrai mise en forme n'est encore mise en place
-void affichage::afficherTitre(const string& titre)const{
-    goto_xy(1,1);
-    cout << titre;
-}
-void affichage::afficherQuestion(const string& intitule)const{
-     goto_xy(1,3);
-     cout << "La question :";
-     goto_xy(1,4);
-     cout << intitule;
-}
-void affichage::afficherReponse(const string& reponse)const{
-     goto_xy(1,6);
-     cout << "La reponse :";
-     goto_xy(1,7);
-     cout << reponse;
-}
-void affichage::afficherMessage(const string& message)const{
-    goto_xy(1,9);
-    cout << message;
+
+
+void affichage::dessinerCadre() const {
+    // Haut et Bas
+    goto_xy(0, 0);  cout << "+--------------------------------------------------+";
+    goto_xy(0, 16); cout << "+--------------------------------------------------+";
+
+    // Cotés
+    for (int y = 1; y < 16; y++) {
+        goto_xy(0, y);  cout << "|";
+        goto_xy(51, y); cout << "|";
+    }
 }
 
+void affichage::afficherTitre(const string& titre) const {
+    goto_xy(2, 2); // Un peu décalé à l'intérieur
+    cout << "=== " << titre << " ===";
+}
+
+void affichage::afficherQuestion(const string& intitule) const {
+    goto_xy(2, 5);
+    cout << "QUESTION :";
+    goto_xy(2, 6); // Juste en dessous
+    cout << intitule;
+}
+
+void affichage::afficherReponse(const string& reponse) const {
+    goto_xy(2, 11);
+    cout << "CORRECTION : " << reponse;
+}
+
+void affichage::afficherMessage(const string& message) const {
+    goto_xy(2, 9);
+    cout << "RESULTAT : " << message;
+}
+
+void affichage::placerCurseurSaisie() const {
+    goto_xy(2, 14); // En bas du cadre
+    cout << "Votre reponse > ";
+}
