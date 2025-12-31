@@ -17,6 +17,7 @@ public:
     void afficherMessage(const std::string& message) const;
     void pause();
     std::string entrer();
+   void  curseur(int x,int y);
 private :
     std::ostream& d_ost;
     std::istream &d_ist;

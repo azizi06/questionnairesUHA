@@ -33,7 +33,7 @@ void evaluation::evaluer(affichage ecran){
 
         // Saisie
         ecran.placerCurseurSaisie();
-        string reponseUtilisateur(ecran.en);
+        std::string reponseUtilisateur(ecran.entrer());
 
 
         // V�rification
@@ -60,13 +60,13 @@ void evaluation::evaluer(affichage ecran){
     ecran.dessinerCadre();
     ecran.afficherTitre("RESULTATS");
 
-    goto_xy(2, 6);
-    moteur.afficherResultats();
+    ecran.curseur(2,6);
+    afficherResultats();
 
     // Nettoyage de la m�moire (car on a fait un 'new')
-    delete maStrategie;
+    
 
-    pauseJeu();
+    ecran.pause();
     
     
 

@@ -34,6 +34,9 @@ void affichage::dessinerCadre() const {
         goto_xy(51, y); d_ost << "|";
     }
 }
+void affichage::curseur(int x,int y){
+    goto_xy(x, y);
+}
 
 void affichage::afficherTitre(const string& titre) const {
     goto_xy(2, 2);
