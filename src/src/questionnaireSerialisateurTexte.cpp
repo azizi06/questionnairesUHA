@@ -9,3 +9,14 @@ questionnaireSerialisateurTexte::~questionnaireSerialisateurTexte()
 {
     //dtor
 }
+
+void questionnaireSerialisateurTexte::ecrire(const questionnaire &quest,const std::string &nomQUESTIONAIRE){
+        }
+void questionnaireSerialisateurTexte::ecrireQuestion(const question &q){
+        }
+void questionnaireSerialisateurTexte::ecrireQuestionTexte(const questionTexte &qt){
+        }
+void questionnaireSerialisateurTexte::ecrireQuestionNumerique(const questionTexte &qn){
+        }
+void questionnaireSerialisateurTexte::ecrireQuestionChoixMultiple(const questionTexte &qc){
+        }
