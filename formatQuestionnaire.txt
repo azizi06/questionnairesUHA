@@ -18,6 +18,6 @@ QC
     //question choix multiple
     [intitulé question]
     [choix1,choix2,choix3,choix4]
-    [1,3]  // indices des réponses correctes 
+    [1]  // indice de la réponse correcte
 }
 
