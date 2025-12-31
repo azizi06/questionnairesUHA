@@ -20,6 +20,7 @@ public:
 };
 
 #endif
+
 /*
  On ne veut pas mélanger affichage et logique, donc on cree une classe chargé de l’affichage console
  qui isole l’utilisation de goto_xy
