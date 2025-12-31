@@ -1,50 +1,32 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
-#include <string>
-#include "../include/evaluation.h"
-#include "../include/strategieEvaluation.h"
-#include"questionnaire.h"
-
-/*
- Classe evaluation :
- - g�re le d�roulement d'une �valuation
- - utilise une strat�gie d'�valuation
- - calcule les r�sultats
-*/
+#include "questionnaire.h"
+#include "strategieEvaluation.h"
 
 class evaluation {
 private:
-    questionnaire* questionnaire;
-    strategieEvaluation* strategie;
+    const questionnaire* d_questionnaire;
+    strategieEvaluation* d_strategie;
 
-    int nombreEssais;
-    int nombreBonnesReponses;
-    int indiceQuestionCourante;
+    int d_nombreEssais;
+    int d_nombreBonnesReponses;
+    int d_indiceQuestionCourante;
 
 public:
-    // Constructeur : une �valuation est faite � partir d'un questionnaire
-    evaluation(questionnaire* q, strategieEvaluation* s);
+    evaluation(const questionnaire* q, strategieEvaluation* s);
 
-    // D�marrer l'�valuation
     void commencer();
-
-    // Indique s'il reste des questions
     bool aDesQuestions() const;
 
-    // Retourne la question courante
-    question* questionCourante() const;
+    const question* questionCourante() const;
 
-    // Soumettre la r�ponse de l'utilisateur
     bool repondre(const std::string& reponseUtilisateur);
 
-    // Indique si on peut afficher la bonne r�ponse
     bool peutAfficherCorrection() const;
 
-    // Passer � la question suivante
     void questionSuivante();
 
-    // Afficher les r�sultats finaux
     void afficherResultats() const;
 };
 

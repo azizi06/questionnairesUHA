@@ -4,7 +4,7 @@
 #include "strategieEvaluation.h"
 
 /*
- Évaluation Test :
+
  - questions dans l'ordre
  - une seule tentative
  - pas d'affichage de la correction
