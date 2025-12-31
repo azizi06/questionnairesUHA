@@ -4,8 +4,14 @@
 #include <cstdlib>
 
 using namespace std;
-affichage::affichage(std::ostream& ost):d_ost{ost}{
+affichage::affichage(std::ostream& ost, std::istream &ist):d_ost{ost},d_ist{ist}{
 
+}
+std::string affichage::entrer(){
+    placerCurseurSaisie();
+    std::string choix;
+    d_ist >> choix;
+    return choix;
 }
 
 void affichage::clearCMD() const {

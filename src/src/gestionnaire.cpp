@@ -22,12 +22,7 @@ std::unique_ptr<questionnaire>  gestionnaire::questionnaireParDefault(){
     f.close();
     return std::move(q);
 }
-std::string gestionnaire::entrer(){
-    ecran.placerCurseurSaisie();
-    std::string choix;
-    d_ist >> choix;
-    return choix;
-}
+
 void gestionnaire::affmenu(){
     ecran.clearCMD();
     ecran.dessinerCadre();
@@ -53,7 +48,7 @@ strategieEvaluation*  gestionnaire::choisireStrategie(){
     strategieEvaluation* maStrategie;
     while (!choixValide)
     {
-        choix = std::stoi(entrer());
+        choix = std::stoi(ecran.entrer());
         if (choix == 1) {
             maStrategie = new StrategieTest(); 
             choixValide = true;
@@ -82,7 +77,7 @@ void gestionnaire::excuter(){
 
     while(encore){
         affmenu();
-        int choix = std::stoi(entrer());
+        int choix = std::stoi(ecran.entrer());
         if(choix == 1){
             auto q = questionnaireParDefault();
             apprentissage session(*q);
@@ -97,7 +92,7 @@ void gestionnaire::excuter(){
            auto maStrategie = choisireStrategie();
            evaluation maEvaluation{q.get(),maStrategie};
            maEvaluation.commencer();
-           maEvaluation.evaluer();
+           maEvaluation.evaluer(ecran);
             
 
         }else if (choix == 3){

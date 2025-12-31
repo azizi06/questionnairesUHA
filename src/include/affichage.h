@@ -5,7 +5,7 @@
 
 class affichage {
 public:
-    affichage(std::ostream& ost=std::cout);
+    affichage(std::ostream& ost=std::cout,std::istream& ist=std::cin);
     void clearCMD() const;
 
     void dessinerCadre() const; // C'est �a le "dessin" demand�
@@ -16,8 +16,10 @@ public:
     void afficherReponse(const std::string& reponse) const;
     void afficherMessage(const std::string& message) const;
     void pause();
+    std::string entrer();
 private :
     std::ostream& d_ost;
+    std::istream &d_ist;
 
 };
 

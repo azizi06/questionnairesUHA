@@ -15,7 +15,6 @@ class gestionnaire
         void excuter();
 
     private:
-        std::string entrer();
         void affmenu();
         strategieEvaluation* choisireStrategie();
         std::unique_ptr<questionnaire>  questionnaireParDefault();
