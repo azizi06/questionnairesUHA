@@ -13,6 +13,7 @@
 #include "./include/questionChoixMultiple.h"
 #include "./include/apprentissage.h"
 #include "./include/questionnaireDeserialisateurTexte.h"
+#include"./include/gestionnaire.h"
 
 using namespace std;
 
@@ -43,7 +44,7 @@ void testApprentissage()
         "Paris"
     ));
 
-    // Question numérique
+    // Question numï¿½rique
     q.add(make_unique<questionNumerique>(
         "Combien font 6 x 7 ?",
         42,
@@ -51,7 +52,7 @@ void testApprentissage()
         100
     ));
 
-    // Question à choix multiple
+    // Question ï¿½ choix multiple
     vector<string> options = {
         "Rouge",
         "Vert",
@@ -61,7 +62,7 @@ void testApprentissage()
     q.add(make_unique<questionChoixMultiple>(
         "Quelle est la couleur du ciel par temps clair ?",
         options,
-        3   // réponse correcte = option 3 (Bleu)
+        3   // rï¿½ponse correcte = option 3 (Bleu)
     ));
 
     // Lancement du mode apprentissage
@@ -72,7 +73,7 @@ void testApprentissage()
 void testEvaluation(){
 
  // =========================================================
-    // 1. BASE DE DONNÉES (QUESTIONS)
+    // 1. BASE DE DONNï¿½ES (QUESTIONS)
     // =========================================================
     questionnaire q;
     q.add(make_unique<questionTexte>("Capitale de la France ?", "Paris"));
@@ -106,7 +107,7 @@ void testEvaluation(){
         // -----------------------------------------------------
         if (choixMenu == 1) {
             apprentissage session(q);
-            session.apprendre(); // Lance le mode révision
+            session.apprendre(); // Lance le mode rï¿½vision
 
             ecran.clearCMD();
             ecran.dessinerCadre();
@@ -119,7 +120,7 @@ void testEvaluation(){
         // -----------------------------------------------------
         else if (choixMenu == 2) {
 
-            // --- SOUS-MENU : CHOIX DE LA STRATÉGIE ---
+            // --- SOUS-MENU : CHOIX DE LA STRATï¿½GIE ---
             ecran.clearCMD();
             ecran.dessinerCadre();
             ecran.afficherTitre("CHOIX DE LA STRATEGIE");
@@ -132,8 +133,8 @@ void testEvaluation(){
             int choixStrat;
             cin >> choixStrat;
 
-            // --- CRÉATION DYNAMIQUE DE LA STRATÉGIE ---
-            // C'est ici que le polymorphisme opère !
+            // --- CRï¿½ATION DYNAMIQUE DE LA STRATï¿½GIE ---
+            // C'est ici que le polymorphisme opï¿½re !
             strategieEvaluation* maStrategie = nullptr;
 
             if (choixStrat == 1) {
@@ -144,7 +145,7 @@ void testEvaluation(){
                 maStrategie = new StrategieAdaptative();
             }
 
-            // Initialisation de la stratégie choisie
+            // Initialisation de la stratï¿½gie choisie
             maStrategie->init(q.taille());
 
             // --- LANCEMENT DU MOTEUR ---
@@ -168,7 +169,7 @@ void testEvaluation(){
                 string reponseUtilisateur;
                 cin >> reponseUtilisateur;
 
-                // Vérification
+                // Vï¿½rification
                 bool estCorrect = moteur.repondre(reponseUtilisateur);
 
                 // Feedback
@@ -177,7 +178,7 @@ void testEvaluation(){
                 } else {
                     ecran.afficherMessage("RATE...");
 
-                    // Si la stratégie choisie autorise la correction
+                    // Si la stratï¿½gie choisie autorise la correction
                     if (moteur.peutAfficherCorrection()) {
                         ecran.afficherReponse(qCourante->getReponseCorrecte());
                     }
@@ -195,7 +196,7 @@ void testEvaluation(){
             goto_xy(2, 6);
             moteur.afficherResultats();
 
-            // Nettoyage de la mémoire (car on a fait un 'new')
+            // Nettoyage de la mï¿½moire (car on a fait un 'new')
             delete maStrategie;
 
             pauseJeu();
@@ -210,6 +211,7 @@ void testEvaluation(){
 
 
 int main() {
-   testApprentissage( );
+    gestionnaire g{};
+    g.excuter();
     return 0;
 }
