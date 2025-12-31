@@ -9,10 +9,10 @@ void affichage::clearCMD() const {
     system("cls");
 }
 
-
 void affichage::dessinerCadre() const {
-    // Haut et Bas
+    // Haut
     goto_xy(0, 0);  cout << "+--------------------------------------------------+";
+    // Bas
     goto_xy(0, 16); cout << "+--------------------------------------------------+";
 
     // Cotés
@@ -23,14 +23,14 @@ void affichage::dessinerCadre() const {
 }
 
 void affichage::afficherTitre(const string& titre) const {
-    goto_xy(2, 2); // Un peu décalé à l'intérieur
+    goto_xy(2, 2);
     cout << "=== " << titre << " ===";
 }
 
 void affichage::afficherQuestion(const string& intitule) const {
     goto_xy(2, 5);
     cout << "QUESTION :";
-    goto_xy(2, 6); // Juste en dessous
+    goto_xy(2, 6);
     cout << intitule;
 }
 
@@ -45,6 +45,6 @@ void affichage::afficherMessage(const string& message) const {
 }
 
 void affichage::placerCurseurSaisie() const {
-    goto_xy(2, 14); // En bas du cadre
+    goto_xy(2, 14);
     cout << "Votre reponse > ";
 }

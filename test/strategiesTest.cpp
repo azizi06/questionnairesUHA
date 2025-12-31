@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include "../src/include/doctest.h"
 
-#include "../include/strategies.h"
+#include "../src/include/strategies.h"
 
 #include <vector>
 #include <string>
