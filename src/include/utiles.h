@@ -13,7 +13,8 @@ namespace util {
 
 
 
-      std::string make_lower(std::string& str);
+    std::string make_lower(std::string& str);
+    std::vector<std::string> trim(std::string& phrase, char sep);
 
 }
 

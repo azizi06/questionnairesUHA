@@ -23,6 +23,5 @@ std::string questionChoixMultiple::Intitule() const  {
     for (int i = 0; i < d_options.size(); ++i) {
         result += std::to_string(i + 1) + ". " + d_options[i] + " , ";
     }
-    
     return result;
 }
