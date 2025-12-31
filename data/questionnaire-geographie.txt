@@ -1,0 +1,24 @@
+[geographie]
+QT
+{
+[Quel est le nom du plus long fleuve du monde ?]
+[Le Nil]
+}
+QT
+{
+[Quelle est la capitale de l'Australie ?]
+[Canberra]
+}
+QN
+{
+[Quelle est l'altitude (en mètres) du sommet du Mont Everest?]
+[8850]
+[8845]
+[8852]
+}
+QC
+{
+[Parmi ces pays, lequel n'est PAS membre de l'Union Européenne ?]
+[La Norvège,Italie,Irlande,Pologne]
+[1]
+}

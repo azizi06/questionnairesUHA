@@ -33,8 +33,6 @@ TEST_CASE("[questionnaireDeserialisateurTexte] methodes de la classe fonctionne"
         REQUIRE_EQ(deserialisateur.determinerTypeObjet(qT),QT);
         REQUIRE_EQ(deserialisateur.determinerTypeObjet(qN),QN);
         REQUIRE_EQ(deserialisateur.determinerTypeObjet(qC),QC);
-
-
     }
 
 
