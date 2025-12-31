@@ -1,8 +1,9 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
-#include "questionnaire.h"
-#include "strategieEvaluation.h"
+#include "../include/questionnaire.h"
+#include "../include/strategieEvaluation.h"
+#include "../include/affichage.h"
 
 class evaluation {
 private:
@@ -17,6 +18,7 @@ public:
     evaluation(const questionnaire* q, strategieEvaluation* s);
 
     void commencer();
+    void evaluer(affichage ecran);
     bool aDesQuestions() const;
 
     const question* questionCourante() const;

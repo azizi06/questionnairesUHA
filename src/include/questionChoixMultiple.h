@@ -12,7 +12,8 @@ private:
 
 public:
     questionChoixMultiple(const std::string& intitule,const std::vector<std::string>& options,int correct);
-
+    std::vector<std::string> options();
+    std::string Intitule() const override;
     bool estBonneReponse(const std::string& reponse) const override;
     std::string getReponseCorrecte() const override;
 };

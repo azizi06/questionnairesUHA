@@ -1,6 +1,7 @@
 #include "../include/questionnaireDeserialisateurTexte.h"
 #include<iostream>
 #include<vector>
+#include "../include/utiles.h"
 questionnaireDeserialisateurTexte::questionnaireDeserialisateurTexte(std::istream &ifs):ifs{ifs}{
 
 }
@@ -16,27 +17,27 @@ int questionnaireDeserialisateurTexte::determinerTypeObjet(const std::string &li
     }
 }
 
-questionnaire questionnaireDeserialisateurTexte::lire(){
+std::unique_ptr<questionnaire> questionnaireDeserialisateurTexte::lire(){
     //ifs.seekg(0);
     std::string titre = lireString();
-    questionnaire quest{};
-    quest.setTitre(titre);
+    auto quest= std::make_unique<questionnaire>();
+    quest->setTitre(titre);
     std::string ligne;
     while(std::getline(ifs,ligne)){
             switch(determinerTypeObjet(ligne)){
         case QT:{     std::cout << "hell\n";
             auto qT = lireQuestionTexte();
-            quest.add(std::make_unique<questionTexte>(qT));
+            quest->add(std::make_unique<questionTexte>(qT));
             break;
         }
         case QN:{//QN:
             auto qN = lireQuestionNumerique();
-            quest.add(std::make_unique<questionNumerique>(qN));
+            quest->add(std::make_unique<questionNumerique>(qN));
             break;
         }
         case QC:{//QC
             auto qC = lireQuestionChoixMultiple();
-            quest.add(std::make_unique<questionChoixMultiple>(qC));
+            quest->add(std::make_unique<questionChoixMultiple>(qC));
             break;
         }
         default:{
@@ -140,9 +141,9 @@ std::string questionnaireDeserialisateurTexte::lireString() {
     std::string ligne;
     if (std::getline(ifs, ligne)) {
          if (ligne.front() == DEBUTTEXT && ligne.back() == FINTEXT) {
-            return ligne.substr(1, ligne.length() - 2);
-            }
-         return ligne;
+            std::string str=ligne.substr(1, ligne.length() - 2); 
+            return  util::make_lower(str);
+        }
     }
     return "";
 }

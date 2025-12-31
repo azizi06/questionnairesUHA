@@ -8,7 +8,7 @@ class questionnaireDeserialisateurTexte : public  questionnaireDeserialisateur
 {
     public:
         questionnaireDeserialisateurTexte(std::istream &ifs);
-        questionnaire lire() override;
+        std::unique_ptr<questionnaire> lire() override;
         questionTexte lireQuestionTexte() override;
         questionNumerique lireQuestionNumerique() override;
         questionChoixMultiple lireQuestionChoixMultiple() override;

@@ -1,8 +1,8 @@
 [geographie]
 QT
 {
-[Quel est le nom du plus long fleuve du monde ?]
-[Le Nil]
+[Quelle est la capitale de la france ?]
+[paris]
 }
 QT
 {
