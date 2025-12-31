@@ -24,7 +24,7 @@ questionnaire questionnaireDeserialisateurTexte::lire(){
     std::string ligne;
     while(std::getline(ifs,ligne)){
             switch(determinerTypeObjet(ligne)){
-        case QT:{//QT
+        case QT:{     std::cout << "hell\n";
             auto qT = lireQuestionTexte();
             quest.add(std::make_unique<questionTexte>(qT));
             break;

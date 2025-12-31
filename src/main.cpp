@@ -2,7 +2,7 @@
 #include <string>
 #include <memory>
 #include <cstdlib>
-
+#include <fstream>
 #include "include/evaluation.h"
 #include "include/strategies.h"
 #include "include/affichage.h"
@@ -12,8 +12,20 @@
 #include "./include/questionNumerique.h"
 #include "./include/questionChoixMultiple.h"
 #include "./include/apprentissage.h"
+#include "./include/questionnaireDeserialisateurTexte.h"
 
 using namespace std;
+
+questionnaire lireQuestionnaire(){
+    std::ifstream f("../data/questionnaire-geographie.txt");
+    if(!f){
+        cout << "impossible ouvrire le fichier";
+    }
+    questionnaireDeserialisateurTexte d{f};
+    questionnaire q = d.lire();
+    f.close();
+    return q;
+}
 
 void pauseJeu() {
     goto_xy(2, 17);
@@ -53,7 +65,8 @@ void testApprentissage()
     ));
 
     // Lancement du mode apprentissage
-    apprentissage app(q);
+    questionnaire q2 = lireQuestionnaire();
+    apprentissage app(q2);
     app.apprendre();
 }
 void testEvaluation(){
@@ -197,6 +210,6 @@ void testEvaluation(){
 
 
 int main() {
-   testEvaluation( );
+   testApprentissage( );
     return 0;
 }
