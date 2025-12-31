@@ -4,9 +4,49 @@
 questionnaireDeserialisateurTexte::questionnaireDeserialisateurTexte(std::istream &ifs):ifs{ifs}{
 
 }
+int questionnaireDeserialisateurTexte::determinerTypeObjet(const std::string &ligne){
+    if(ligne.find("QT") == 0){
+        return QT;
+    }else if(ligne.find("QN") == 0){
+        return QN;
+    }else if(ligne.find("QC") == 0){
+        return QC;
+    }else{
+        return 0;
+    }
+}
 
 questionnaire questionnaireDeserialisateurTexte::lire(){
+    //ifs.seekg(0);
+    std::string titre = lireString();
     questionnaire quest{};
+    quest.setTitre(titre);
+    std::string ligne;
+    while(std::getline(ifs,ligne)){
+            switch(determinerTypeObjet(ligne)){
+        case QT:{//QT
+            auto qT = lireQuestionTexte();
+            quest.add(std::make_unique<questionTexte>(qT));
+            break;
+        }
+        case QN:{//QN:
+            auto qN = lireQuestionNumerique();
+            quest.add(std::make_unique<questionNumerique>(qN));
+            break;
+        }
+        case QC:{//QC
+            auto qC = lireQuestionChoixMultiple();
+            quest.add(std::make_unique<questionChoixMultiple>(qC));
+            break;
+        }
+        default:{
+            std::cout << "erreur syntaxique";
+            break;
+        }
+            }
+
+    }
+    return quest;
 
 }
 
@@ -73,9 +113,6 @@ questionChoixMultiple questionnaireDeserialisateurTexte::lireQuestionChoixMultip
     }
     return questionChoixMultiple(enonce,options,reponse);
 }
-
-
-
 std::vector<std::string> questionnaireDeserialisateurTexte::trim(std::string& phrase, char sep) {
     std::vector<std::string> resultat;
     if (phrase.empty()) {
@@ -99,7 +136,6 @@ std::vector<std::string> questionnaireDeserialisateurTexte::trim(std::string& ph
     }
     return resultat;
 }
-
 std::string questionnaireDeserialisateurTexte::lireString() {
     std::string ligne;
     if (std::getline(ifs, ligne)) {

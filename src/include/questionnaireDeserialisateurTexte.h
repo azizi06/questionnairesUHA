@@ -18,7 +18,7 @@ class questionnaireDeserialisateurTexte : public  questionnaireDeserialisateur
         QT -> pour question text
         QC -> pour question ChoixsMultiple
         **/
-        std::string determinerTypeObjet();
+        int determinerTypeObjet(const std::string &ligne);
         // lire des phrase ex : [phrase]
         std::string lireString();
      std::vector<std::string> trim(std::string& phrase, char sep);
