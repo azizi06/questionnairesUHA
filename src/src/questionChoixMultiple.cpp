@@ -19,7 +19,7 @@ std::vector<std::string> questionChoixMultiple::options(){
     return d_options;
 }
 std::string questionChoixMultiple::Intitule() const  {
-    std::string result = question::Intitule() + "\n";
+    std::string result = question::Intitule() + "\n  ";
     for (int i = 0; i < d_options.size(); ++i) {
         result += std::to_string(i + 1) + ". " + d_options[i] + " , ";
     }
