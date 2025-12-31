@@ -1,10 +1,15 @@
 #ifndef AFFICHAGE_H
 #define AFFICHAGE_H
+
 #include <string>
 
-class affichage{
+class affichage {
 public:
     void clearCMD() const;
+
+    void dessinerCadre() const; // C'est ça le "dessin" demandé
+    void placerCurseurSaisie() const; // Pour savoir où écrire
+
     void afficherTitre(const std::string& titre) const;
     void afficherQuestion(const std::string& intitule) const;
     void afficherReponse(const std::string& reponse) const;
@@ -12,7 +17,3 @@ public:
 };
 
 #endif
- /*
-  On ne veut pas mélanger affichage et logique, donc on cree une classe chargé de l’affichage console
-  qui isole l’utilisation de goto_xy
- */
