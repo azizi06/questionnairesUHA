@@ -11,7 +11,7 @@ private:
 public:
     question(const std::string& intitule);
     virtual ~question() = default;
-    std::string Intitule() const;
+    virtual std::string Intitule() const;
     virtual bool estBonneReponse(const std::string& reponse) const =0;
     virtual std::string getReponseCorrecte() const =0;
 };

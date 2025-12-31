@@ -1,6 +1,7 @@
 #include "../include/questionnaireDeserialisateurTexte.h"
 #include<iostream>
 #include<vector>
+#include "../include/utiles.h"
 questionnaireDeserialisateurTexte::questionnaireDeserialisateurTexte(std::istream &ifs):ifs{ifs}{
 
 }
@@ -19,7 +20,7 @@ int questionnaireDeserialisateurTexte::determinerTypeObjet(const std::string &li
 std::unique_ptr<questionnaire> questionnaireDeserialisateurTexte::lire(){
     //ifs.seekg(0);
     std::string titre = lireString();
-    auto quest= std::unique_ptr<questionnaire>();
+    auto quest= std::make_unique<questionnaire>();
     quest->setTitre(titre);
     std::string ligne;
     while(std::getline(ifs,ligne)){
@@ -140,9 +141,9 @@ std::string questionnaireDeserialisateurTexte::lireString() {
     std::string ligne;
     if (std::getline(ifs, ligne)) {
          if (ligne.front() == DEBUTTEXT && ligne.back() == FINTEXT) {
-            return ligne.substr(1, ligne.length() - 2);
-            }
-         return ligne;
+            std::string str=ligne.substr(1, ligne.length() - 2); 
+            return  util::make_lower(str);
+        }
     }
     return "";
 }

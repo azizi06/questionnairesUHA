@@ -16,7 +16,7 @@ class gestionnaire
 
     private:
         void affmenu();
-        strategieEvaluation* choisireStrategie();
+        std::unique_ptr<strategieEvaluation>  choisireStrategie();
         std::unique_ptr<questionnaire>  questionnaireParDefault();
         affichage ecran;
         std::istream &d_ist;

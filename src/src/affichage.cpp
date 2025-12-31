@@ -2,6 +2,7 @@
 #include "../include/goto_xy_windows.h"
 #include <iostream>
 #include <cstdlib>
+#include "../include/utiles.h"
 
 using namespace std;
 affichage::affichage(std::ostream& ost, std::istream &ist):d_ost{ost},d_ist{ist}{
@@ -11,6 +12,7 @@ std::string affichage::entrer(){
     placerCurseurSaisie();
     std::string choix;
     d_ist >> choix;
+    util::make_lower(choix);
     return choix;
 }
 
@@ -23,15 +25,17 @@ void affichage::pause(){
 }
 
 void affichage::dessinerCadre() const {
+    std::string ligne{"+-------------------------------------------------------------------------------+"};
+    int hauteur = 25;
     // Haut
-    goto_xy(0, 0);  d_ost << "+--------------------------------------------------+";
+    goto_xy(0, 0);  d_ost << ligne;
     // Bas
-    goto_xy(0, 16); d_ost << "+--------------------------------------------------+";
+    goto_xy(0, hauteur); d_ost << ligne;
 
     // Cot�s
-    for (int y = 1; y < 16; y++) {
+    for (int y = 1; y < hauteur; y++) {
         goto_xy(0, y);  d_ost << "|";
-        goto_xy(51, y); d_ost << "|";
+        goto_xy(ligne.size()-1, y); d_ost << "|";
     }
 }
 void affichage::curseur(int x,int y){

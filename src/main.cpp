@@ -17,16 +17,7 @@
 
 using namespace std;
 
-questionnaire lireQuestionnaire(){
-    std::ifstream f("../data/questionnaire-geographie.txt");
-    if(!f){
-        cout << "impossible ouvrire le fichier";
-    }
-    questionnaireDeserialisateurTexte d{f};
-    questionnaire q = d.lire();
-    f.close();
-    return q;
-}
+
 
 void pauseJeu() {
     goto_xy(2, 17);
@@ -66,8 +57,8 @@ void testApprentissage()
     ));
 
     // Lancement du mode apprentissage
-    questionnaire q2 = lireQuestionnaire();
-    apprentissage app(q2);
+
+    apprentissage app(q);
     app.apprendre();
 }
 void testEvaluation(){

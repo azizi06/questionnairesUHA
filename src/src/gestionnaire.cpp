@@ -35,7 +35,7 @@ void gestionnaire::affmenu(){
     
 
 }
-strategieEvaluation*  gestionnaire::choisireStrategie(){
+std::unique_ptr<strategieEvaluation>  gestionnaire::choisireStrategie(){
     ecran.clearCMD();
     ecran.dessinerCadre();
     ecran.afficherTitre("CHOIX DE LA STRATEGIE");
@@ -45,19 +45,19 @@ strategieEvaluation*  gestionnaire::choisireStrategie(){
     goto_xy(5, 10); d_ost << "3. ADAPTATIVE (Repose les questions ratees)";
     int choix ;
     bool choixValide = false;
-    strategieEvaluation* maStrategie;
+    std::unique_ptr<strategieEvaluation>  maStrategie;
     while (!choixValide)
     {
         choix = std::stoi(ecran.entrer());
         if (choix == 1) {
-            maStrategie = new StrategieTest(); 
+            maStrategie =std::make_unique<StrategieTest>(); 
             choixValide = true;
         } else if (choix == 2) {
-            maStrategie = new StrategieSecondeChance();
+            maStrategie = std::make_unique<StrategieSecondeChance>();
             choixValide = true;
 
         } else if(choix == 3) {
-            maStrategie = new StrategieAdaptative();
+            maStrategie   = std::make_unique<StrategieAdaptative>();
             choixValide = true;
         }else{
             goto_xy(5,12);d_ost << "choix invalide";
@@ -90,10 +90,9 @@ void gestionnaire::excuter(){
         }else if(choix == 2){
            auto q= questionnaireParDefault();
            auto maStrategie = choisireStrategie();
-           evaluation maEvaluation{q.get(),maStrategie};
+           evaluation maEvaluation{q.get(),maStrategie.get()};
            maEvaluation.commencer();
-           maEvaluation.evaluer(ecran);
-            
+           maEvaluation.evaluer(ecran);         
 
         }else if (choix == 3){
             encore = false;
