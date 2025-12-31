@@ -8,13 +8,14 @@ class questionnaireSerialisateurTexte : public questionnaireSerialisateur
         questionnaireSerialisateurTexte();
         virtual ~questionnaireSerialisateurTexte();
 
-        void ecrire(const questionnaire &quest,const std::string &nomQUESTIONAIRE) override;
+        void ecrire() override;
         void ecrireQuestion(const question &q) override;
         void ecrireQuestionTexte(const questionTexte &qt) override;
         void ecrireQuestionNumerique(const questionTexte &qn) override;
         void ecrireQuestionChoixMultiple(const questionTexte &qc) override;
 
     private:
+
 };
 
 #endif // QUESTIONAIRESERIALISATEURTEXTE_H

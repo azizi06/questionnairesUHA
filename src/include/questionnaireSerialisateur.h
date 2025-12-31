@@ -13,7 +13,7 @@ class questionnaireSerialisateur
     public:
         questionnaireSerialisateur();
         virtual ~questionnaireSerialisateur();
-        virtual void ecrire(const questionnaire &quest,const std::string &nomQUESTIONAIRE)=0;
+        virtual void ecrire()=0;
         virtual void ecrireQuestion(const question &q)=0;
         virtual void ecrireQuestionTexte(const questionTexte &qt)=0;
         virtual void ecrireQuestionNumerique(const questionTexte &qn)=0;

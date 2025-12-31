@@ -5,6 +5,8 @@
 #include "../include/strategies.h"
 #include "../include/apprentissage.h"
 #include "../include/questionnaireDeserialisateurTexte.h"
+#include "../include/dirent.h"
+#include "../include/utiles.h"
 #include <fstream>
 
 gestionnaire::gestionnaire(std::istream &ist,std::ostream &ost):d_ist{ist},d_ost{ost},ecran{affichage{}}
@@ -42,7 +44,8 @@ std::unique_ptr<strategieEvaluation>  gestionnaire::choisireStrategie(){
 
     goto_xy(5, 6); d_ost << "1. CLASSIQUE (Lineaire, pas d'aide)";
     goto_xy(5, 8); d_ost << "2. SECONDE CHANCE (2 essais autorises)";
-    goto_xy(5, 10); d_ost << "3. ADAPTATIVE (Repose les questions ratees)";
+    goto_xy(5, 10); d_ost <<"3. ADAPTATIVE (Repose les questions ratees)";
+    goto_xy(5, 12); d_ost <<"4. retour au menu principale";
     int choix ;
     bool choixValide = false;
     std::unique_ptr<strategieEvaluation>  maStrategie;
@@ -59,8 +62,13 @@ std::unique_ptr<strategieEvaluation>  gestionnaire::choisireStrategie(){
         } else if(choix == 3) {
             maStrategie   = std::make_unique<StrategieAdaptative>();
             choixValide = true;
+        }
+        else if(choix == 4) {
+                maStrategie   = nullptr;
+                choixValide = true;
+            
         }else{
-            goto_xy(5,12);d_ost << "choix invalide";
+            ecran.curseur(5,12);d_ost << "choix invalide\n";
             ecran.pause();
         }
 
@@ -79,30 +87,83 @@ void gestionnaire::excuter(){
         affmenu();
         int choix = std::stoi(ecran.entrer());
         if(choix == 1){
-            auto q = questionnaireParDefault();
-            apprentissage session(*q);
-            session.apprendre(); // Lance le mode r�vision
-            ecran.clearCMD();
-            ecran.dessinerCadre();
-            ecran.afficherMessage("Revision terminee !");
-            ecran.pause();
-
+            auto q = choisirquestionnaire();//questionnaireParDefault();
+            if(q != nullptr){
+                apprentissage session(*q);
+                session.apprendre(); 
+                ecran.clearCMD();
+                ecran.dessinerCadre();
+                ecran.afficherMessage("Revision terminee !");
+                ecran.pause();
+            }
         }else if(choix == 2){
-           auto q= questionnaireParDefault();
+           auto q= choisirquestionnaire();//questionnaireParDefault();
            auto maStrategie = choisireStrategie();
-           evaluation maEvaluation{q.get(),maStrategie.get()};
-           maEvaluation.commencer();
-           maEvaluation.evaluer(ecran);         
+           if(maStrategie != nullptr && q!= nullptr){
+            evaluation maEvaluation{q.get(),maStrategie.get()};
+            maEvaluation.commencer();
+            maEvaluation.evaluer(ecran); 
+            }        
 
         }else if (choix == 3){
             encore = false;
         }else{
-            goto_xy(5,13);d_ost<<"choix invalide";
+            ecran.curseur(5,13);d_ost<<"choix invalide\n";
             ecran.pause();
         }
         
 
     }
+
+}
+std::unique_ptr<questionnaire>  gestionnaire::choisirquestionnaire(){
+    std::vector<std::string> list = listeQuestionnair();
+    if(list.size()==0){ 
+        return questionnaireParDefault();
+    }
+    ecran.clearCMD();
+    ecran.dessinerCadre();
+    ecran.afficherTitre("Liste Questionnaires");
+    std::string strList = "";
+
+    for (int i = 0; i < list.size(); ++i) {//util::trim(list[i],'\'').back() 
+        strList += std::to_string(i) + ". " + list[i] + "\n";
+    }
+    strList += std::to_string(list.size()) +". quitter";
+    ecran.curseur(5,6);
+    d_ost << strList;
+    int choix ;
+    bool estValid = false;
+    while(!estValid){
+        choix = std::stoi(ecran.entrer());
+        if(choix >= 0 && choix <= list.size() -1){
+            estValid = true;
+        }else if(choix == list.size()){
+            return nullptr;
+        }else{
+            ecran.curseur(5,20);d_ost<<"choix invalide\n";
+            ecran.pause();
+        }
+    }
+
+    std::fstream f(DATAREP+"/"+list[choix]);
+    questionnaireDeserialisateurTexte deserialisateur{f};
+    auto q = deserialisateur.lire();
+    f.close();
+    return q;
+}
+std::vector<std::string> gestionnaire::listeQuestionnair(){
+    std::vector<std::string> listQ{};
+    DIR* rep = opendir(gestionnaire::DATAREP.c_str());
+    dirent *elem;
+    while ((elem=readdir(rep))!=nullptr){
+        std::string fichier{elem->d_name};
+        if(fichier != "." && fichier!=".." && elem->d_type == DT_REG){
+            listQ.push_back(fichier);
+        }
+    }
+    return listQ;
+
 
 }
 
