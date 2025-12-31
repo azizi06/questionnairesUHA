@@ -34,8 +34,6 @@ void gestionnaire::affmenu(){
     goto_xy(10, 8); d_ost << "2. MODE EXAMEN (Evaluation)";
     goto_xy(10, 10); d_ost << "3. QUITTER";
 
-    
-
 }
 std::unique_ptr<strategieEvaluation>  gestionnaire::choisireStrategie(){
     ecran.clearCMD();
@@ -126,8 +124,8 @@ std::unique_ptr<questionnaire>  gestionnaire::choisirquestionnaire(){
     ecran.afficherTitre("Liste Questionnaires");
     std::string strList = "";
 
-    for (int i = 0; i < list.size(); ++i) {//util::trim(list[i],'\'').back() 
-        strList += std::to_string(i) + ". " + list[i] + "\n";
+    for (int i = 0; i < list.size(); ++i) {
+        strList += std::to_string(i) + ". " + list[i] + "\n  ";
     }
     strList += std::to_string(list.size()) +". quitter";
     ecran.curseur(5,6);
