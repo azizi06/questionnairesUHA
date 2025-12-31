@@ -1,12 +1,12 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include "../src/include/doctest.h"
 
-#include "../include/evaluation.h"
-#include "../include/strategies.h"
+#include "../src/include/evaluation.h"
+#include "../src/include/strategies.h"
 
 
-#include "../include/questionnaire.h"
-#include "../include/questionTexte.h"
+#include "../src/include/questionnaire.h"
+#include "../src/include/questionTexte.h"
 
 #include <memory>
 
