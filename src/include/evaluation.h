@@ -17,6 +17,7 @@ public:
     evaluation(const questionnaire* q, strategieEvaluation* s);
 
     void commencer();
+    void evaluer();
     bool aDesQuestions() const;
 
     const question* questionCourante() const;

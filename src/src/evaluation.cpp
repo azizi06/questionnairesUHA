@@ -19,7 +19,10 @@ void evaluation::commencer() {
     d_strategie->init(d_questionnaire->taille());
     questionSuivante();
 }
+void evaluation::evaluer(){
 
+
+}
 bool evaluation::aDesQuestions() const {
     return d_strategie->aDesQuestions();
 }

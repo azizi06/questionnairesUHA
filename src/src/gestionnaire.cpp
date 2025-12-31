@@ -92,8 +92,7 @@ void gestionnaire::excuter(){
 
         }else if(choix == 2){
 
-        }else if (choix == 3)
-        {
+        }else if (choix == 3){
             encore = false;
         }else{
             goto_xy(5,13);d_ost<<"choix invalide";
