@@ -3,146 +3,158 @@
 #include <memory>
 #include <cstdlib>
 
-// --- TES INCLUDES (LOGIQUE) ---
-#include "../include/evaluation.h"
-#include "../include/strategies.h"
-#include "../include/questionnaire.h"
-#include "../include/questionTexte.h"
-#include "../include/apprentissage.h"
-
-// --- TON INCLUDE (VISUEL) ---
-#include "../include/affichage.h"
-#include "../include/goto_xy_windows.h"
+// TES INCLUDES
+#include "include/evaluation.h"
+#include "include/strategies.h"
+#include "include/questionnaire.h"
+#include "include/questionTexte.h"
+#include "include/apprentissage.h"
+#include "include/affichage.h"
+#include "include/goto_xy_windows.h"
 
 using namespace std;
 
-// Fonction utilitaire pour faire une pause propre
+// Petite fonction pour centrer le curseur en bas pour la pause
 void pauseJeu() {
-    goto_xy(2, 17); // En bas du cadre
+    goto_xy(2, 17);
     system("pause");
 }
 
 int main() {
     // =========================================================
-    // 1. CRÉATION DE LA BASE DE DONNÉES (QUESTIONS)
+    // 1. BASE DE DONNÉES (QUESTIONS)
     // =========================================================
-    // On crée le questionnaire une seule fois au début
     questionnaire q;
-
-    // Remplissage (Tu peux en ajouter autant que tu veux)
     q.add(make_unique<questionTexte>("Capitale de la France ?", "Paris"));
-    q.add(make_unique<questionTexte>("Resultat de 3 * 7 ?", "21"));
-    q.add(make_unique<questionTexte>("Mot cle pour une boucle ?", "while"));
-    q.add(make_unique<questionTexte>("Animal qui aboie ?", "Chien"));
-    q.add(make_unique<questionTexte>("Couleur du ciel ?", "Bleu"));
+    q.add(make_unique<questionTexte>("5 * 5 ?", "25"));
+    q.add(make_unique<questionTexte>("Mot cle pour l'heritage ?", "public"));
+    q.add(make_unique<questionTexte>("Animal qui miaule ?", "Chat"));
+
+    // Ajoute d'autres questions ici si tu veux...
 
     affichage ecran;
     int choixMenu = 0;
 
     // =========================================================
-    // 2. BOUCLE PRINCIPALE (MENU)
+    // 2. BOUCLE PRINCIPALE
     // =========================================================
     do {
+        // --- AFFICHAGE MENU PRINCIPAL ---
         ecran.clearCMD();
         ecran.dessinerCadre();
         ecran.afficherTitre("MENU PRINCIPAL");
 
-        // Affichage du menu centré manuellement
         goto_xy(10, 6); cout << "1. MODE REVISION (Apprentissage)";
         goto_xy(10, 8); cout << "2. MODE EXAMEN (Evaluation)";
         goto_xy(10, 10); cout << "3. QUITTER";
 
-        // Saisie du choix
         ecran.placerCurseurSaisie();
         cin >> choixMenu;
 
-        // =====================================================
-        // CAS 1 : MODE APPRENTISSAGE
-        // =====================================================
+        // -----------------------------------------------------
+        // CAS 1 : APPRENTISSAGE
+        // -----------------------------------------------------
         if (choixMenu == 1) {
-            // On lance le module d'apprentissage
-            // Il gère son propre affichage via sa méthode apprendre()
             apprentissage session(q);
-            session.apprendre();
+            session.apprendre(); // Lance le mode révision
 
-            // Quand c'est fini :
             ecran.clearCMD();
             ecran.dessinerCadre();
             ecran.afficherMessage("Revision terminee !");
             pauseJeu();
         }
 
-        // =====================================================
-        // CAS 2 : MODE ÉVALUATION
-        // =====================================================
+        // -----------------------------------------------------
+        // CAS 2 : EVALUATION (EXAMEN)
+        // -----------------------------------------------------
         else if (choixMenu == 2) {
-            // 1. On configure la stratégie (Ici Adaptative, c'est la plus cool)
-            StrategieAdaptative strat;
-            strat.init(q.taille()); // On initialise avec la taille réelle du questionnaire
 
-            // 2. On prépare le moteur
-            evaluation moteur(&q, &strat);
+            // --- SOUS-MENU : CHOIX DE LA STRATÉGIE ---
+            ecran.clearCMD();
+            ecran.dessinerCadre();
+            ecran.afficherTitre("CHOIX DE LA STRATEGIE");
+
+            goto_xy(5, 6); cout << "1. CLASSIQUE (Lineaire, pas d'aide)";
+            goto_xy(5, 8); cout << "2. SECONDE CHANCE (2 essais autorises)";
+            goto_xy(5, 10); cout << "3. ADAPTATIVE (Repose les questions ratees)";
+
+            ecran.placerCurseurSaisie();
+            int choixStrat;
+            cin >> choixStrat;
+
+            // --- CRÉATION DYNAMIQUE DE LA STRATÉGIE ---
+            // C'est ici que le polymorphisme opère !
+            strategieEvaluation* maStrategie = nullptr;
+
+            if (choixStrat == 1) {
+                maStrategie = new StrategieTest(); // Ou StrategieClassique selon tes noms
+            } else if (choixStrat == 2) {
+                maStrategie = new StrategieSecondeChance();
+            } else {
+                maStrategie = new StrategieAdaptative();
+            }
+
+            // Initialisation de la stratégie choisie
+            maStrategie->init(q.taille());
+
+            // --- LANCEMENT DU MOTEUR ---
+            evaluation moteur(&q, maStrategie);
             moteur.commencer();
 
-            // 3. Boucle de jeu de l'examen
+            // Boucle de jeu (Examen)
             while (moteur.aDesQuestions()) {
-                // A. Mise en page
                 ecran.clearCMD();
                 ecran.dessinerCadre();
                 ecran.afficherTitre("MODE EXAMEN");
 
-                // B. Affichage Question
+                // Affichage question
                 const question* qCourante = moteur.questionCourante();
                 if (qCourante) {
                     ecran.afficherQuestion(qCourante->Intitule());
                 }
 
-                // C. Saisie Réponse
+                // Saisie
                 ecran.placerCurseurSaisie();
                 string reponseUtilisateur;
                 cin >> reponseUtilisateur;
 
-                // D. Vérification
+                // Vérification
                 bool estCorrect = moteur.repondre(reponseUtilisateur);
 
-                // E. Feedback (Bravo/Raté)
+                // Feedback
                 if (estCorrect) {
                     ecran.afficherMessage("BRAVO ! Bonne reponse.");
                 } else {
                     ecran.afficherMessage("RATE...");
 
-                    // Si la stratégie le permet (ex: après 2 essais), on aide
+                    // Si la stratégie choisie autorise la correction
                     if (moteur.peutAfficherCorrection()) {
                         ecran.afficherReponse(qCourante->getReponseCorrecte());
                     }
                 }
 
-                // F. Suite
                 moteur.questionSuivante();
                 pauseJeu();
             }
 
-            // 4. Fin de l'examen et Résultats
+            // --- FIN DE L'EXAMEN ---
             ecran.clearCMD();
             ecran.dessinerCadre();
             ecran.afficherTitre("RESULTATS");
 
-            // On affiche le score proprement
             goto_xy(2, 6);
             moteur.afficherResultats();
+
+            // Nettoyage de la mémoire (car on a fait un 'new')
+            delete maStrategie;
 
             pauseJeu();
         }
 
-    } while (choixMenu != 3); // Tant qu'on ne choisit pas 3, on revient au menu
+    } while (choixMenu != 3);
 
-    // =========================================================
-    // 3. FIN DU PROGRAMME
-    // =========================================================
+    // FIN
     ecran.clearCMD();
-    ecran.dessinerCadre();
-    goto_xy(15, 8); cout << "AU REVOIR !";
-    goto_xy(0, 18);
-
+    goto_xy(0, 0);
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "evaluation.h"
+#include "../include/evaluation.h"
 #include <iostream>
 
 evaluation::evaluation(const questionnaire* q, strategieEvaluation* s)

@@ -1,25 +1,20 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-// Tes classes
 #include "../include/evaluation.h"
 #include "../include/strategies.h"
 
-// Les classes nécessaires pour remplir les données
+
 #include "../include/questionnaire.h"
-#include "../include/questionTexte.h" // <--- OBLIGATOIRE pour créer une question
+#include "../include/questionTexte.h"
 
-#include <memory> // Pour std::make_unique
+#include <memory>
 
-TEST_CASE("Test Unitaire : Evaluation (avec QuestionTexte)") {
+TEST_CASE(" Classe Evaluation") {
 
-    // 1. ARRANGE (Préparation)
     questionnaire q;
-
-    // On est obligé d'utiliser QuestionTexte car Question est abstraite
-    // Je suppose que le constructeur est (Intitulé, Réponse)
-    q.add(std::make_unique<QuestionTexte>("Capitale de la France ?", "Paris"));
-    q.add(std::make_unique<QuestionTexte>("Couleur du cheval blanc ?", "Blanc"));
+    q.add(std::make_unique<questionTexte>("Capitale de la France ?", "Paris"));
+    q.add(std::make_unique<questionTexte>("2 + 2 ?", "4"));
 
     StrategieTest strat;
     strat.init(2);
@@ -27,18 +22,36 @@ TEST_CASE("Test Unitaire : Evaluation (avec QuestionTexte)") {
     evaluation e(&q, &strat);
     e.commencer();
 
-    // 2. ACT & ASSERT (Test)
 
-    SUBCASE("Répondre Juste") {
-        // La question est "Capitale de la France ?", la réponse attendue est "Paris"
-        // C'est QuestionTexte qui va faire la comparaison
+    SUBCASE("Scénario : Réponse Correcte") {
+        // On vérifie D'ABORD que le pointeur n'est pas nul avec REQUIRE
+        // Si c'est nul, on arrête, sinon le programme crasherait à la ligne suivante
+        REQUIRE(e.questionCourante() != nullptr);
+
+        REQUIRE(e.questionCourante()->Intitule() == "Capitale de la France ?");
+
         bool resultat = e.repondre("Paris");
+        REQUIRE(resultat == true); // Si ça échoue, on arrête
 
-        CHECK(resultat == true);
+        e.questionSuivante();
+
+        REQUIRE(e.questionCourante() != nullptr);
+        REQUIRE(e.questionCourante()->Intitule() == "2 + 2 ?");
     }
 
-    SUBCASE("Répondre Faux") {
-        bool resultat = e.repondre("Berlin");
-        CHECK(resultat == false);
+    SUBCASE("Scénario : Mauvaise Réponse") {
+        bool resultat = e.repondre("Londres");
+        REQUIRE(resultat == false);
+    }
+
+    SUBCASE("Scénario : Fin de partie") {
+        e.repondre("Paris");
+        e.questionSuivante();
+
+        e.repondre("4");
+        e.questionSuivante();
+
+        // On exige qu'il n'y ait plus de questions
+        REQUIRE(e.aDesQuestions() == false);
     }
 }

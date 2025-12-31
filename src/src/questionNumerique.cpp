@@ -2,11 +2,7 @@
 #include <stdexcept>
 
 questionNumerique::questionNumerique(const std::string& intitule,int reponse,int valeurMin,int valeurMax):
-<<<<<<< HEAD
     question{intitule}, d_reponse{reponse}, d_valeurMin{valeurMin}, d_valeurMax{valeurMax} {}
-=======
-    question(intitule), d_reponse{reponse}, d_valeurMin{valeurMin}, d_valeurMax{valeurMax} {}
->>>>>>> origin/feature/classes-questions
 
 bool questionNumerique::estBonneReponse(const std::string& reponse) const {
     try {
