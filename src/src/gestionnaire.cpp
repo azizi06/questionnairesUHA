@@ -42,7 +42,8 @@ std::unique_ptr<strategieEvaluation>  gestionnaire::choisireStrategie(){
 
     goto_xy(5, 6); d_ost << "1. CLASSIQUE (Lineaire, pas d'aide)";
     goto_xy(5, 8); d_ost << "2. SECONDE CHANCE (2 essais autorises)";
-    goto_xy(5, 10); d_ost << "3. ADAPTATIVE (Repose les questions ratees)";
+    goto_xy(5, 10); d_ost <<"3. ADAPTATIVE (Repose les questions ratees)";
+    goto_xy(5, 12); d_ost <<"4. retour au menu principale";
     int choix ;
     bool choixValide = false;
     std::unique_ptr<strategieEvaluation>  maStrategie;
@@ -59,6 +60,11 @@ std::unique_ptr<strategieEvaluation>  gestionnaire::choisireStrategie(){
         } else if(choix == 3) {
             maStrategie   = std::make_unique<StrategieAdaptative>();
             choixValide = true;
+        }
+        else if(choix == 4) {
+                maStrategie   = nullptr;
+                choixValide = true;
+            
         }else{
             goto_xy(5,12);d_ost << "choix invalide";
             ecran.pause();
@@ -90,9 +96,11 @@ void gestionnaire::excuter(){
         }else if(choix == 2){
            auto q= questionnaireParDefault();
            auto maStrategie = choisireStrategie();
-           evaluation maEvaluation{q.get(),maStrategie.get()};
-           maEvaluation.commencer();
-           maEvaluation.evaluer(ecran);         
+           if(maStrategie != nullptr && q!= nullptr){
+            evaluation maEvaluation{q.get(),maStrategie.get()};
+            maEvaluation.commencer();
+            maEvaluation.evaluer(ecran); 
+            }        
 
         }else if (choix == 3){
             encore = false;

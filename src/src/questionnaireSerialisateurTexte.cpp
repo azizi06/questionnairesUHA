@@ -10,7 +10,7 @@ questionnaireSerialisateurTexte::~questionnaireSerialisateurTexte()
     //dtor
 }
 
-void questionnaireSerialisateurTexte::ecrire(const questionnaire &quest,const std::string &nomQUESTIONAIRE){
+void questionnaireSerialisateurTexte::ecrire(){
         }
 void questionnaireSerialisateurTexte::ecrireQuestion(const question &q){
         }
