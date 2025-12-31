@@ -5,9 +5,11 @@
 #define FINQUESTION '}'
 #define DEBUTTEXT '['
 #define FINTEXT ']'
-#define QT 'QT' // question texte
-#define QN 'QN' // question numérique
-#define QC 'QC' // question choix multiple
+
+#define QT 1 // question texte
+#define QN 2 // question numérique
+#define QC 3 // question choix multiple
+
 #define SEPARATEUR ','
 
 #include "question.h"
@@ -21,7 +23,7 @@ class questionnaire
         std::string titre() const;
         void setTitre(const std::string& titre);
         void add(std::unique_ptr<question> question);
-        const question* getQuestionNumero(int i)const;
+        const question* getQuestionNumero(int i) const;
         int taille() const;
     private:
         std::string d_titre;

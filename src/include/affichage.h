@@ -7,8 +7,8 @@ class affichage {
 public:
     void clearCMD() const;
 
-    void dessinerCadre() const; // C'est ça le "dessin" demandé
-    void placerCurseurSaisie() const; // Pour savoir où écrire
+    void dessinerCadre() const; // C'est ï¿½a le "dessin" demandï¿½
+    void placerCurseurSaisie() const; // Pour savoir oï¿½ ï¿½crire
 
     void afficherTitre(const std::string& titre) const;
     void afficherQuestion(const std::string& intitule) const;

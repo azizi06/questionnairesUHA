@@ -12,7 +12,7 @@ evaluation::evaluation(const questionnaire* q, strategieEvaluation* s)
 
 void evaluation::commencer() {
     if (!d_questionnaire || !d_strategie) {
-        std::cout << "Erreur : évaluation mal initialisée.\n";
+        std::cout << "Erreur : ï¿½valuation mal initialisï¿½e.\n";
         return;
     }
 
@@ -31,9 +31,10 @@ const question* evaluation::questionCourante() const {
     return d_questionnaire->getQuestionNumero(d_indiceQuestionCourante);
 }
 
+
 bool evaluation::repondre(const std::string& reponseUtilisateur) {
     const question* q = questionCourante();
-    if (!q) return false;
+
 
     d_nombreEssais++;
 
@@ -58,7 +59,7 @@ void evaluation::questionSuivante() {
 }
 
 void evaluation::afficherResultats() const {
-    std::cout << "\n=== Résultats ===\n";
+    std::cout << "\n=== Rï¿½sultats ===\n";
     std::cout << "Questions : " << d_questionnaire->taille() << "\n";
     std::cout << "Essais    : " << d_nombreEssais << "\n";
     std::cout << "Bonnes    : " << d_nombreBonnesReponses << "\n";
