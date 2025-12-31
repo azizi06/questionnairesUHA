@@ -3,25 +3,62 @@
 #include <memory>
 #include <cstdlib>
 
-// TES INCLUDES
 #include "include/evaluation.h"
 #include "include/strategies.h"
-#include "include/questionnaire.h"
-#include "include/questionTexte.h"
-#include "include/apprentissage.h"
 #include "include/affichage.h"
 #include "include/goto_xy_windows.h"
+#include "./include/questionnaire.h"
+#include "./include/questionTexte.h"
+#include "./include/questionNumerique.h"
+#include "./include/questionChoixMultiple.h"
+#include "./include/apprentissage.h"
 
 using namespace std;
 
-// Petite fonction pour centrer le curseur en bas pour la pause
 void pauseJeu() {
     goto_xy(2, 17);
     system("pause");
 }
 
-int main() {
-    // =========================================================
+void testApprentissage()
+{
+    questionnaire q;
+    q.setTitre("Questionnaire de test");
+
+    // Question texte
+    q.add(make_unique<questionTexte>(
+        "Quelle est la capitale de la France ?",
+        "Paris"
+    ));
+
+    // Question numérique
+    q.add(make_unique<questionNumerique>(
+        "Combien font 6 x 7 ?",
+        42,
+        0,
+        100
+    ));
+
+    // Question à choix multiple
+    vector<string> options = {
+        "Rouge",
+        "Vert",
+        "Bleu"
+    };
+
+    q.add(make_unique<questionChoixMultiple>(
+        "Quelle est la couleur du ciel par temps clair ?",
+        options,
+        3   // réponse correcte = option 3 (Bleu)
+    ));
+
+    // Lancement du mode apprentissage
+    apprentissage app(q);
+    app.apprendre();
+}
+void testEvaluation(){
+
+ // =========================================================
     // 1. BASE DE DONNÉES (QUESTIONS)
     // =========================================================
     questionnaire q;
@@ -156,5 +193,10 @@ int main() {
     // FIN
     ecran.clearCMD();
     goto_xy(0, 0);
+}
+
+
+int main() {
+   testApprentissage();
     return 0;
 }
