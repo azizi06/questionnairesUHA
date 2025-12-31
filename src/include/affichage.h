@@ -2,29 +2,18 @@
 #define AFFICHAGE_H
 
 #include <string>
-#include "affichageInterface.h"
 
-class affichage : public affichageInterface {
+class affichage {
 public:
-    void clearCMD() const override;
-    void afficherTitre(const std::string& titre) const override;
-    void afficherQuestion(const std::string& intitule) const override;
-    void afficherReponse(const std::string& reponse) const override;
-    void afficherMessage(const std::string& message) const override;
+    void clearCMD() const;
 
-    void attendreTouche() const override;
+    void dessinerCadre() const; // C'est ï¿½a le "dessin" demandï¿½
+    void placerCurseurSaisie() const; // Pour savoir oï¿½ ï¿½crire
 
-
-    void dessinerCadre() const;
-    void placerCurseurSaisie() const;
+    void afficherTitre(const std::string& titre) const;
+    void afficherQuestion(const std::string& intitule) const;
+    void afficherReponse(const std::string& reponse) const;
+    void afficherMessage(const std::string& message) const;
 };
 
 #endif
-
-/*
- On ne veut pas mélanger affichage et logique, donc on cree une classe chargé de l’affichage console
- qui isole l’utilisation de goto_xy
-*/
-
-
-

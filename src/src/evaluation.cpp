@@ -1,107 +1,66 @@
 #include "../include/evaluation.h"
-
-
 #include <iostream>
 
-/*
- Constructeur :
- - une évaluation est toujours faite à partir d'un questionnaire
- - et utilise une stratégie d'évaluation
-*/
-Evaluation::Evaluation(Questionnaire* q, strategieEvaluation* s)
-    : questionnaire(q),
-      strategie(s),
-      nombreEssais(0),
-      nombreBonnesReponses(0),
-      indiceQuestionCourante(-1)
+evaluation::evaluation(const questionnaire* q, strategieEvaluation* s)
+    : d_questionnaire(q),
+      d_strategie(s),
+      d_nombreEssais(0),
+      d_nombreBonnesReponses(0),
+      d_indiceQuestionCourante(-1)
 {
 }
 
-/*
- Démarre l'évaluation.
- Initialise la stratégie avec le nombre de questions du questionnaire.
-*/
 void evaluation::commencer() {
-    if (!questionnaire || !strategie) {
-        std::cout << "Erreur : évaluation mal initialisée.\n";
+    if (!d_questionnaire || !d_strategie) {
+        std::cout << "Erreur : ï¿½valuation mal initialisï¿½e.\n";
         return;
     }
 
-    strategie->init(questionnaire->taille());
+    d_strategie->init(d_questionnaire->taille());
     questionSuivante();
 }
 
-/*
- Indique s'il reste des questions à poser
-*/
-bool Evaluation::aDesQuestions() const {
-    return strategie->aDesQuestions();
+bool evaluation::aDesQuestions() const {
+    return d_strategie->aDesQuestions();
 }
 
-/*
- Retourne la question courante
-*/
-Question* Evaluation::questionCourante() const {
-    if (indiceQuestionCourante < 0) {
+const question* evaluation::questionCourante() const {
+    if (d_indiceQuestionCourante < 0) {
         return nullptr;
     }
-    return questionnaire->getQuestion(indiceQuestionCourante);
+    return d_questionnaire->getQuestionNumero(d_indiceQuestionCourante);
 }
 
-/*
- Soumettre la réponse de l'utilisateur
- - vérifie si la réponse est correcte
- - informe la stratégie
- - met à jour les compteurs
-*/
-bool Evaluation::repondre(const std::string& reponseUtilisateur) {
-    question* q = questionCourante();
-    if (!q) {
-        return false;
-    }
 
-    nombreEssais++;
+bool evaluation::repondre(const std::string& reponseUtilisateur) {
+    const question* q = questionCourante();
+
+
+    d_nombreEssais++;
 
     bool correcte = q->estBonneReponse(reponseUtilisateur);
 
     if (correcte) {
-        nombreBonnesReponses++;
+        d_nombreBonnesReponses++;
     }
 
-    // informer la stratégie du résultat
-    strategie->soumettreReponse(indiceQuestionCourante, correcte);
-
+    d_strategie->soumettreReponse(d_indiceQuestionCourante, correcte);
     return correcte;
 }
 
-/*
- Indique si la correction peut être affichée
- (dépend de la stratégie)
-*/
-bool Evaluation::peutAfficherCorrection() const {
-    return strategie->peutAfficherCorrection(indiceQuestionCourante);
+bool evaluation::peutAfficherCorrection() const {
+    return d_strategie->peutAfficherCorrection(d_indiceQuestionCourante);
 }
 
-/*
- Passer à la question suivante
-*/
-void Evaluation::questionSuivante() {
-    if (strategie->aDesQuestions()) {
-        indiceQuestionCourante = strategie->questionSuivante();
+void evaluation::questionSuivante() {
+    if (d_strategie->aDesQuestions()) {
+        d_indiceQuestionCourante = d_strategie->questionSuivante();
     }
 }
 
-/*
- Affiche les résultats finaux de l'évaluation
-*/
-void Evaluation::afficherResultats() const {
-    std::cout << "\n=== Résultats de l'évaluation ===\n";
-    std::cout << "Nombre de questions : " << questionnaire->taille() << "\n";
-    std::cout << "Nombre d'essais     : " << nombreEssais << "\n";
-    std::cout << "Bonnes réponses     : " << nombreBonnesReponses << "\n";
-
-    if (questionnaire->taille() > 0) {
-        int score = (nombreBonnesReponses * 100) / questionnaire->taille();
-        std::cout << "Score final         : " << score << " %\n";
-    }
+void evaluation::afficherResultats() const {
+    std::cout << "\n=== Rï¿½sultats ===\n";
+    std::cout << "Questions : " << d_questionnaire->taille() << "\n";
+    std::cout << "Essais    : " << d_nombreEssais << "\n";
+    std::cout << "Bonnes    : " << d_nombreBonnesReponses << "\n";
 }

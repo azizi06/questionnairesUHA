@@ -6,7 +6,7 @@
 class question {
 private:
     std::string d_intitule;
-    
+
 
 public:
     question(const std::string& intitule);
