@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "goto_xy_windows.h"
+#include "../include/goto_xy_windows.h"
 
 void goto_xy(int x, int y)
 {
