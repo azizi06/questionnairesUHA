@@ -26,7 +26,6 @@ public:
 
     virtual void soumettreReponse(int indiceQuestion, bool bonneReponse) = 0;
 
-
     virtual bool peutAfficherCorrection(int indiceQuestion) const = 0;
 };
 

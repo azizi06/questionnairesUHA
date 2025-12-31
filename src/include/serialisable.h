@@ -8,6 +8,6 @@ class serialisable
         serialisable();
         virtual ~serialisable();
         virtual void ecrire(questionnaireSerialisateur* qs)=0;
-}
+};
 
 #endif // SERIALISABLE_H
