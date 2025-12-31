@@ -23,6 +23,7 @@ public:
     void attendreTouche() const override { logs.push_back("WAIT"); } // ne bloque pas
 };
 
+
 TEST_CASE("apprentissage affiche chaque question et attend une touche") {
     questionnaire q;
     q.add(std::make_unique<questionTexte>(
@@ -35,10 +36,9 @@ TEST_CASE("apprentissage affiche chaque question et attend une touche") {
 
     app.apprendre();
 
-    REQUIRE(mock.logs.size() >= 6);
-    CHECK(mock.logs[0] == "CLEAR");
-    CHECK(mock.logs[1] == "TITRE:Vous etes dans le mode apprentissage");
-    CHECK(mock.logs[2] == "QUESTION:Quelle est la capitale de la France ?");
-    CHECK(mock.logs[3] == "REPONSE:Paris");
-    CHECK(mock.logs[5] == "WAIT");
+    REQUIRE_EQ(mock.logs[0], "CLEAR");
+    REQUIRE_EQ(mock.logs[1], "TITRE:Vous etes dans le mode apprentissage");
+    REQUIRE_EQ(mock.logs[2], "QUESTION:Quelle est la capitale de la France ?");
+    REQUIRE_EQ(mock.logs[3], "REPONSE:Paris");
+    REQUIRE_EQ(mock.logs[5], "WAIT");
 }
