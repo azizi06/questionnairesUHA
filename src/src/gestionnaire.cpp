@@ -1,6 +1,7 @@
 #include "../include/gestionnaire.h"
 #include "../include/goto_xy_windows.h"
 #include "../include/strategieEvaluation.h"
+#include "../include/evaluation.h"
 #include "../include/strategies.h"
 #include "../include/apprentissage.h"
 #include "../include/questionnaireDeserialisateurTexte.h"
@@ -10,15 +11,16 @@ gestionnaire::gestionnaire(std::istream &ist,std::ostream &ost):d_ist{ist},d_ost
 {
     //ctor
 }
-questionnaire  gestionnaire::questionnaireParDefault(){
+std::unique_ptr<questionnaire>  gestionnaire::questionnaireParDefault(){
     std::ifstream f("../data/questionnaire-geographie.txt");
     if(!f){
         d_ost << "impossible ouvrire le fichier";
     }
     questionnaireDeserialisateurTexte d{f};
-    questionnaire q = d.lire();
+    auto q = d.lire();
+
     f.close();
-    return q;
+    return std::move(q);
 }
 std::string gestionnaire::entrer(){
     ecran.placerCurseurSaisie();
@@ -83,7 +85,7 @@ void gestionnaire::excuter(){
         int choix = std::stoi(entrer());
         if(choix == 1){
             auto q = questionnaireParDefault();
-            apprentissage session(q);
+            apprentissage session(*q);
             session.apprendre(); // Lance le mode r�vision
             ecran.clearCMD();
             ecran.dessinerCadre();
@@ -91,6 +93,12 @@ void gestionnaire::excuter(){
             ecran.pause();
 
         }else if(choix == 2){
+           auto q= questionnaireParDefault();
+           auto maStrategie = choisireStrategie();
+           evaluation maEvaluation{q.get(),maStrategie};
+           maEvaluation.commencer();
+           maEvaluation.evaluer();
+            
 
         }else if (choix == 3){
             encore = false;

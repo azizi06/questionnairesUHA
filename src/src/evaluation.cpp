@@ -12,14 +12,63 @@ evaluation::evaluation(const questionnaire* q, strategieEvaluation* s)
 
 void evaluation::commencer() {
     if (!d_questionnaire || !d_strategie) {
-        std::cout << "Erreur : �valuation mal initialis�e.\n";
+        std::cout << "Erreur : valuation mal initialise.\n";
         return;
     }
 
     d_strategie->init(d_questionnaire->taille());
     questionSuivante();
 }
-void evaluation::evaluer(){
+void evaluation::evaluer(affichage ecran){
+    while (aDesQuestions()) {
+        ecran.clearCMD();
+        ecran.dessinerCadre();
+        ecran.afficherTitre("MODE EXAMEN");
+
+        // Affichage question
+        const question* qCourante = questionCourante();
+        if (qCourante) {
+            ecran.afficherQuestion(qCourante->Intitule());
+        }
+
+        // Saisie
+        ecran.placerCurseurSaisie();
+        string reponseUtilisateur(ecran.en);
+
+
+        // V�rification
+        bool estCorrect = repondre(reponseUtilisateur);
+
+        // Feedback
+        if (estCorrect) {
+            ecran.afficherMessage("BRAVO ! Bonne reponse.");
+        } else {
+            ecran.afficherMessage("RATE...");
+
+            // Si la strat�gie choisie autorise la correction
+            if (peutAfficherCorrection()) {
+                ecran.afficherReponse(qCourante->getReponseCorrecte());
+            }
+        }
+
+        questionSuivante();
+        ecran.pause();
+    }
+
+    // --- FIN DE L'EXAMEN ---
+    ecran.clearCMD();
+    ecran.dessinerCadre();
+    ecran.afficherTitre("RESULTATS");
+
+    goto_xy(2, 6);
+    moteur.afficherResultats();
+
+    // Nettoyage de la m�moire (car on a fait un 'new')
+    delete maStrategie;
+
+    pauseJeu();
+    
+    
 
 
 }

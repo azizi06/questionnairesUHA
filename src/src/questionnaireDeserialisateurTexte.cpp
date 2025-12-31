@@ -16,27 +16,27 @@ int questionnaireDeserialisateurTexte::determinerTypeObjet(const std::string &li
     }
 }
 
-questionnaire questionnaireDeserialisateurTexte::lire(){
+std::unique_ptr<questionnaire> questionnaireDeserialisateurTexte::lire(){
     //ifs.seekg(0);
     std::string titre = lireString();
-    questionnaire quest{};
-    quest.setTitre(titre);
+    auto quest= std::unique_ptr<questionnaire>();
+    quest->setTitre(titre);
     std::string ligne;
     while(std::getline(ifs,ligne)){
             switch(determinerTypeObjet(ligne)){
         case QT:{     std::cout << "hell\n";
             auto qT = lireQuestionTexte();
-            quest.add(std::make_unique<questionTexte>(qT));
+            quest->add(std::make_unique<questionTexte>(qT));
             break;
         }
         case QN:{//QN:
             auto qN = lireQuestionNumerique();
-            quest.add(std::make_unique<questionNumerique>(qN));
+            quest->add(std::make_unique<questionNumerique>(qN));
             break;
         }
         case QC:{//QC
             auto qC = lireQuestionChoixMultiple();
-            quest.add(std::make_unique<questionChoixMultiple>(qC));
+            quest->add(std::make_unique<questionChoixMultiple>(qC));
             break;
         }
         default:{
