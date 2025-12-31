@@ -35,12 +35,12 @@ void affichage::afficherQuestion(const string& intitule) const {
 }
 
 void affichage::afficherReponse(const string& reponse) const {
-    goto_xy(2, 11);
+    goto_xy(2, 9);
     cout << "CORRECTION : " << reponse;
 }
 
 void affichage::afficherMessage(const string& message) const {
-    goto_xy(2, 9);
+    goto_xy(2, 13);
     cout << "RESULTAT : " << message;
 }
 

@@ -197,6 +197,6 @@ void testEvaluation(){
 
 
 int main() {
-   testApprentissage();
+   testEvaluation( );
     return 0;
 }
