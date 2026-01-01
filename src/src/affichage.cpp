@@ -18,9 +18,10 @@ std::string affichage::entrer(){
     util::make_lower(choix);
     return choix;
 }
-
+// pour embellir l'affichage
 void affichage::clearCMD() const {
     system("cls");
+    dessinerCadre();
 }
 void affichage::pause()const{
         goto_xy(2, 17);
@@ -35,7 +36,7 @@ void affichage::dessinerCadre() const {
     // Bas
     goto_xy(0, hauteur); d_ost << ligne;
 
-    // Cot�s
+
     for (int y = 1; y < hauteur; y++) {
         goto_xy(0, y);  d_ost << "|";
         goto_xy(ligne.size()-1, y); d_ost << "|";
@@ -52,19 +53,19 @@ void affichage::afficherTitre(const string& titre) const {
 
 void affichage::afficherQuestion(const string& intitule) const {
     goto_xy(2, 5);
-    d_ost << "QUESTION :";
+    d_ost << "LA QUESTION :";
     goto_xy(2, 6);
     d_ost << intitule;
 }
 
 void affichage::afficherReponse(const string& reponse) const {
     goto_xy(2, 9);
-    d_ost << "CORRECTION : " << reponse;
+    d_ost << "LA BONNE REPONSE : " << reponse;
 }
 
 void affichage::afficherMessage(const string& message) const {
     goto_xy(2, 13);
-    d_ost << "RESULTAT : " << message;
+    d_ost << " " << message;
 }
 
 void affichage::placerCurseurSaisie() const {
