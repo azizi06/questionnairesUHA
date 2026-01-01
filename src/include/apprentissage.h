@@ -7,10 +7,11 @@
 
 class apprentissage {
 public:
-    // Comme avant : tes amis gardent leur main inchangé
+
+    // Constructeur principal
     apprentissage(const questionnaire& questionnaire);
 
-    // Pour les tests : injection d’un affichage (mock)
+    // Constructeur pour les tests, permet l'injection de dépendance (Mock)
     apprentissage(const questionnaire& questionnaire, const affichageInterface& a);
 
     void apprendre() const;
@@ -18,10 +19,9 @@ public:
 private:
     const questionnaire& d_questionnaire;
 
-    // Affichage réel (existe toujours)
     affichage d_affichageReel;
 
-    // Ce que la classe utilise vraiment (réel OU mock)
+    // Ce que la classe utilise réellement (pointe vers le réel ou le Mock)
     const affichageInterface* d_affichage;
 };
 

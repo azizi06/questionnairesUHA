@@ -1,22 +1,28 @@
 #ifndef AFFICHAGE_H
 #define AFFICHAGE_H
-
+#include<iostream>
 #include <string>
-#include "affichageInterface.h"
 
-class affichage : public affichageInterface {
+class affichage {
 public:
-    void clearCMD() const override;
-    void afficherTitre(const std::string& titre) const override;
-    void afficherQuestion(const std::string& intitule) const override;
-    void afficherReponse(const std::string& reponse) const override;
-    void afficherMessage(const std::string& message) const override;
-
-    void attendreTouche() const override;
-
+    affichage(std::ostream& ost=std::cout,std::istream& ist=std::cin);
+    void clearCMD() const;
 
     void dessinerCadre() const;
     void placerCurseurSaisie() const;
+
+    void afficherTitre(const std::string& titre) const;
+    void afficherQuestion(const std::string& intitule) const;
+    void afficherReponse(const std::string& reponse) const;
+    void afficherMessage(const std::string& message) const;
+    void pause();
+    std::string entrer();
+   void  curseur(int x,int y);
+
+private :
+    std::ostream& d_ost;
+    std::istream &d_ist;
+
 };
 
 #endif

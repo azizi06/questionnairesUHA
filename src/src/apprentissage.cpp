@@ -3,13 +3,13 @@
 apprentissage::apprentissage(const questionnaire& questionnaire)
     : d_questionnaire(questionnaire),
       d_affichageReel(),
-      d_affichage(&d_affichageReel) // par défaut, affichage réel
+      d_affichage(&d_affichageReel)
 {}
 
 apprentissage::apprentissage(const questionnaire& questionnaire, const affichageInterface& a)
     : d_questionnaire(questionnaire),
       d_affichageReel(),
-      d_affichage(&a) // affichage injecté (mock)
+      d_affichage(&a)
 {}
 
 void apprentissage::apprendre() const {
