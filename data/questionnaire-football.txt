@@ -1,0 +1,28 @@
+QT
+{
+[Quel club a remporté le plus de Ligue des Champions ?]
+[Real Madrid]
+}
+QT
+{
+[Quel joueur détient le record de buts en Ligue des Champions ?]
+[Cristiano Ronaldo]
+}
+QT
+{
+[Quelle équipe a réalisé le dernier  Ligue des Champions en France ?]
+[PSG]
+}
+QN
+{
+[Combien de titres de Ligue des Champions le Bayern Munich a-t-il remportés ?]
+[6]
+[5]
+[7]
+}
+QC
+{
+[Parmi ces clubs, lequel n'a jamais remporté la Ligue des Champions ?]
+[Manchester City,Tottenham,Chelsea,Arsenal]
+[4]
+}

@@ -49,19 +49,19 @@ void affichage::afficherTitre(const string& titre) const {
 
 void affichage::afficherQuestion(const string& intitule) const {
     goto_xy(2, 5);
-    d_ost << "La question:";
+    d_ost << "QUESTION :";
     goto_xy(2, 6);
     d_ost << intitule;
 }
 
 void affichage::afficherReponse(const string& reponse) const {
     goto_xy(2, 9);
-    d_ost << "La reponse : " << reponse;
+    d_ost << "CORRECTION : " << reponse;
 }
 
 void affichage::afficherMessage(const string& message) const {
     goto_xy(2, 13);
-    d_ost << message;
+    d_ost << "RESULTAT : " << message;
 }
 
 void affichage::placerCurseurSaisie() const {

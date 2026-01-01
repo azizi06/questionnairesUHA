@@ -1,14 +1,14 @@
 #ifndef QUESTIONAIREDESERIALISATEURTEXTE_H
 #define QUESTIONAIREDESERIALISATEURTEXTE_H
 #include<iostream>
-#include"questionnaire.h"
-#include"questionnaireDeserialisateur.h"
+#include"../include/questionnaire.h"
+#include"../include/questionnaireDeserialisateur.h"
 
 class questionnaireDeserialisateurTexte : public  questionnaireDeserialisateur
 {
     public:
         questionnaireDeserialisateurTexte(std::istream &ifs);
-        questionnaire lire() override;
+        std::unique_ptr<questionnaire> lire() override;
         questionTexte lireQuestionTexte() override;
         questionNumerique lireQuestionNumerique() override;
         questionChoixMultiple lireQuestionChoixMultiple() override;
@@ -18,9 +18,10 @@ class questionnaireDeserialisateurTexte : public  questionnaireDeserialisateur
         QT -> pour question text
         QC -> pour question ChoixsMultiple
         **/
-        std::string determinerTypeObjet();
+        int determinerTypeObjet(const std::string &ligne);
         // lire des phrase ex : [phrase]
         std::string lireString();
+     std::vector<std::string> trim(std::string& phrase, char sep);
     private:
         std::istream &ifs;
 

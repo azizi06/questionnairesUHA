@@ -8,8 +8,8 @@ public:
     affichage(std::ostream& ost=std::cout,std::istream& ist=std::cin);
     void clearCMD() const;
 
-    void dessinerCadre() const;
-    void placerCurseurSaisie() const;
+    void dessinerCadre() const; // C'est ï¿½a le "dessin" demandï¿½
+    void placerCurseurSaisie() const; // Pour savoir oï¿½ ï¿½crire
 
     void afficherTitre(const std::string& titre) const;
     void afficherQuestion(const std::string& intitule) const;
@@ -18,7 +18,6 @@ public:
     void pause();
     std::string entrer();
    void  curseur(int x,int y);
-
 private :
     std::ostream& d_ost;
     std::istream &d_ist;
@@ -26,11 +25,3 @@ private :
 };
 
 #endif
-
-/*
- On ne veut pas mélanger affichage et logique, donc on cree une classe chargé de l’affichage console
- qui isole l’utilisation de goto_xy
-*/
-
-
-
