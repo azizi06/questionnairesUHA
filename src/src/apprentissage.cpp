@@ -1,37 +1,28 @@
 #include "../include/apprentissage.h"
-#include <iostream>
-#include <cstdlib> // Pour system("pause")
-
-using namespace std;
 
 apprentissage::apprentissage(const questionnaire& questionnaire)
-    : d_questionnaire(questionnaire)
+    : d_questionnaire(questionnaire),
+      d_affichageReel(),
+      d_affichage(&d_affichageReel)
+{}
+
+apprentissage::apprentissage(const questionnaire& questionnaire, const affichageInterface& a)
+    : d_questionnaire(questionnaire),
+      d_affichageReel(),
+      d_affichage(&a)
 {}
 
 void apprentissage::apprendre() const {
-    // On utilise une boucle simple de 0 à la taille du questionnaire
-    for (int i = 0; i < d_questionnaire.taille(); ++i) {
+    for (int i = 0; i < d_questionnaire.taille(); i++) {
 
-        // On récupère la question numéro i
         const question* q = d_questionnaire.getQuestionNumero(i);
 
-        // 1. Mise en page
-        d_affichage.clearCMD();
-        d_affichage.dessinerCadre();
-        d_affichage.afficherTitre("MODE REVISION");
+        d_affichage->clearCMD();
+        d_affichage->afficherTitre("Vous etes dans le mode apprentissage");
+        d_affichage->afficherQuestion(q->Intitule());
+        d_affichage->afficherReponse(q->getReponseCorrecte());
+        d_affichage->afficherMessage("Appuyez sur une touche pour voir la prochaine");
 
-        // 2. Affichage
-        if (q != nullptr) {
-            d_affichage.afficherQuestion(q->Intitule());
-            // On donne la réponse directement
-            d_affichage.afficherReponse(q->getReponseCorrecte());
-        }
-
-        // 3. Pause
-        d_affichage.afficherMessage("Appuyez sur une touche pour continuer...");
-
-        // Pause propre (tu peux remettre getch() si tu preferes)
-        // goto_xy(0, 18);
-        system("pause");
+        d_affichage->attendreTouche(); //remplace getch()
     }
 }
