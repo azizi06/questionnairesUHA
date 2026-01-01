@@ -8,6 +8,9 @@ using namespace std;
 affichage::affichage(std::ostream& ost, std::istream &ist):d_ost{ost},d_ist{ist}{
 
 }
+void affichage::attendreTouche() const {
+    pause();
+}
 std::string affichage::entrer(){
     placerCurseurSaisie();
     std::string choix;
@@ -19,7 +22,7 @@ std::string affichage::entrer(){
 void affichage::clearCMD() const {
     system("cls");
 }
-void affichage::pause(){
+void affichage::pause()const{
         goto_xy(2, 17);
         system("pause");
 }

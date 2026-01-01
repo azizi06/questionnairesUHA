@@ -32,7 +32,7 @@ TEST_CASE("apprentissage affiche chaque question et attend une touche") {
     ));
 
     MockAffichage mock;
-    apprentissage app(q, mock);
+    apprentissage app(&q, &mock);
 
     app.apprendre();
 

@@ -1,10 +1,8 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "../src/include/doctest.h"
+
+#include "./include/doctest.h"
 
 #include "../src/include/evaluation.h"
 #include "../src/include/strategies.h"
-
-
 #include "../src/include/questionnaire.h"
 #include "../src/include/questionTexte.h"
 
@@ -23,15 +21,15 @@ TEST_CASE(" Classe Evaluation") {
     e.commencer();
 
 
-    SUBCASE("Scénario : Réponse Correcte") {
-        // On vérifie D'ABORD que le pointeur n'est pas nul avec REQUIRE
-        // Si c'est nul, on arrête, sinon le programme crasherait à la ligne suivante
+    SUBCASE("Scnario : Rponse Correcte") {
+        // On vï¿½rifie D'ABORD que le pointeur n'est pas nul avec REQUIRE
+        // Si c'est nul, on arrï¿½te, sinon le programme crasherait ï¿½ la ligne suivante
         REQUIRE(e.questionCourante() != nullptr);
 
         REQUIRE(e.questionCourante()->Intitule() == "Capitale de la France ?");
 
         bool resultat = e.repondre("Paris");
-        REQUIRE(resultat == true); // Si ça échoue, on arrête
+        REQUIRE(resultat == true); // Si ï¿½a ï¿½choue, on arrï¿½te
 
         e.questionSuivante();
 
@@ -39,12 +37,12 @@ TEST_CASE(" Classe Evaluation") {
         REQUIRE(e.questionCourante()->Intitule() == "2 + 2 ?");
     }
 
-    SUBCASE("Scénario : Mauvaise Réponse") {
+    SUBCASE("Scnario : Mauvaise Rponse") {
         bool resultat = e.repondre("Londres");
         REQUIRE(resultat == false);
     }
 
-    SUBCASE("Scénario : Fin de partie") {
+    SUBCASE("Scnario : Fin de partie") {
         e.repondre("Paris");
         e.questionSuivante();
 

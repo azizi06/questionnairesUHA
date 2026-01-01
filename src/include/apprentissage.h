@@ -3,16 +3,22 @@
 
 #include "questionnaire.h"
 #include "affichage.h"
-
+#include "affichageInterface.h"
 
 class apprentissage {
 public:
-    apprentissage(const questionnaire& questionnaire);
-    void apprendre() const;
+
+    // Constructeur principal
+
+    // Constructeur pour les tests, permet l'injection de dépendance (Mock)
+    apprentissage(const questionnaire* questionnaire,affichageInterface* a);
+    void apprendre() ;
 
 private:
-    const questionnaire& d_questionnaire;
-    affichage d_affichage;
+    const questionnaire* d_questionnaire;
+
+    // Ce que la classe utilise réellement (pointe vers le réel ou le Mock)
+    affichageInterface* d_affichage;
 };
 
 #endif

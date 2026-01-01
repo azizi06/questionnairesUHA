@@ -85,9 +85,9 @@ void gestionnaire::excuter(){
         affmenu();
         int choix = std::stoi(ecran.entrer());
         if(choix == 1){
-            auto q = choisirquestionnaire();//questionnaireParDefault();
+            std::unique_ptr<questionnaire> q = choisirquestionnaire();
             if(q != nullptr){
-                apprentissage session(*q);
+                apprentissage session(q.get(),&ecran);
                 session.apprendre(); 
                 ecran.clearCMD();
                 ecran.dessinerCadre();
@@ -95,7 +95,7 @@ void gestionnaire::excuter(){
                 ecran.pause();
             }
         }else if(choix == 2){
-           auto q= choisirquestionnaire();//questionnaireParDefault();
+           auto q= choisirquestionnaire();
            auto maStrategie = choisireStrategie();
            if(maStrategie != nullptr && q!= nullptr){
             evaluation maEvaluation{q.get(),maStrategie.get()};

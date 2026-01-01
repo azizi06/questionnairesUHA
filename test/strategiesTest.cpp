@@ -1,4 +1,3 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../src/include/doctest.h"
 
 #include "../src/include/strategies.h"

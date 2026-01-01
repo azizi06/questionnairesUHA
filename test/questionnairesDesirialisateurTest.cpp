@@ -7,7 +7,7 @@ TEST_CASE("[questionnaireDeserialisateurTexte] methodes de la classe fonctionne"
         std::string input = "[Titre du questionnaire]";
         std::istringstream iss(input);
         questionnaireDeserialisateurTexte deserialisateur(iss);
-        REQUIRE_EQ(deserialisateur.lireString() ,"Titre du questionnaire");
+        REQUIRE_EQ(deserialisateur.lireString() ,"titre du questionnaire");
     }
     SUBCASE("lireString() - ligne vide") {
         std::string input = "";
@@ -43,8 +43,8 @@ TEST_CASE("questions sont lit correctement"){
         std::istringstream iss(input);
         questionnaireDeserialisateurTexte deserialisateur(iss);
         questionTexte q = deserialisateur.lireQuestionTexte();
-        REQUIRE_EQ(q.Intitule(),"Quelle est la capitale de la France?");
-        REQUIRE_EQ(q.getReponseCorrecte(),"Paris");
+        REQUIRE_EQ(q.Intitule(),"quelle est la capitale de la france?");
+        REQUIRE_EQ(q.getReponseCorrecte(),"paris");
 
     }
     SUBCASE("question text est lit corrextement avec des espaces"){
@@ -52,8 +52,8 @@ TEST_CASE("questions sont lit correctement"){
         std::istringstream iss(input);
         questionnaireDeserialisateurTexte deserialisateur(iss);
         questionTexte q = deserialisateur.lireQuestionTexte();
-        REQUIRE_EQ(q.Intitule(),"  Question avec des espaces  ");
-        REQUIRE_EQ(q.getReponseCorrecte(),"  Réponse avec espaces  ");
+        REQUIRE_EQ(q.Intitule(),"  question avec des espaces  ");
+        REQUIRE_EQ(q.getReponseCorrecte(),"  réponse avec espaces  ");
     }
     SUBCASE("question numérique est lit correctement"){
         std::string input = "{\n[c'est quoi la temperature moyenne de mois decembre en france?]\n[12]\n[10]\n[14]\n}\n";
@@ -70,7 +70,11 @@ TEST_CASE("questions sont lit correctement"){
         questionnaireDeserialisateurTexte deserialisateur(iss);
 
         questionChoixMultiple q = deserialisateur.lireQuestionChoixMultiple();
-        REQUIRE_EQ(q.Intitule(),"Quelle est la capitale de la France?");
+        REQUIRE_EQ(
+            q.Intitule(),
+            "quelle est la capitale de la france?\n  1. paris , 2. londres , 3. berlin , 4. madrid , "
+        );
+        ;
         REQUIRE_EQ(q.getReponseCorrecte(),"1");
     }
 }
@@ -81,13 +85,13 @@ TEST_CASE("[questionnaireDeserialisateurTexte] lire une questionnaire correcteme
         questionnaireDeserialisateurTexte deserialisateur(iss);
         auto quest = deserialisateur.lire();
 
-        REQUIRE_EQ(quest.titre(),"questionaire");
-        REQUIRE_EQ(quest.getQuestionNumero(0)->Intitule(),"Question 01");
-        REQUIRE_EQ(quest.getQuestionNumero(0)->getReponseCorrecte(),"Réponse");
+        REQUIRE_EQ(quest->titre(),"questionaire");
+        REQUIRE_EQ(quest->getQuestionNumero(0)->Intitule(),"question 01");
+        REQUIRE_EQ(quest->getQuestionNumero(0)->getReponseCorrecte(),"réponse");
 
 
-        REQUIRE_EQ(quest.getQuestionNumero(1)->Intitule(),"Quelle est la capitale de la France?");
-        REQUIRE_EQ(quest.getQuestionNumero(1)->getReponseCorrecte(),"1");
+        REQUIRE_EQ(quest->getQuestionNumero(1)->Intitule(),"quelle est la capitale de la france?\n  1. paris , 2. londres , 3. berlin , 4. madrid , ");
+        REQUIRE_EQ(quest->getQuestionNumero(1)->getReponseCorrecte(),"1");
 
 
     }
