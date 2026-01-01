@@ -1,7 +1,4 @@
-
 #include "./include/doctest.h"
-
-
 
 #include "../src/include/apprentissage.h"
 #include "../src/include/affichageInterface.h"
