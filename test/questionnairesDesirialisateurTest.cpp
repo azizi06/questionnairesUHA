@@ -81,13 +81,13 @@ TEST_CASE("[questionnaireDeserialisateurTexte] lire une questionnaire correcteme
         questionnaireDeserialisateurTexte deserialisateur(iss);
         auto quest = deserialisateur.lire();
 
-        REQUIRE_EQ(quest.titre(),"questionaire");
-        REQUIRE_EQ(quest.getQuestionNumero(0)->Intitule(),"Question 01");
-        REQUIRE_EQ(quest.getQuestionNumero(0)->getReponseCorrecte(),"Réponse");
+        REQUIRE_EQ(quest->titre(),"questionaire");
+        REQUIRE_EQ(quest->getQuestionNumero(0)->Intitule(),"Question 01");
+        REQUIRE_EQ(quest->getQuestionNumero(0)->getReponseCorrecte(),"Réponse");
 
 
-        REQUIRE_EQ(quest.getQuestionNumero(1)->Intitule(),"Quelle est la capitale de la France?");
-        REQUIRE_EQ(quest.getQuestionNumero(1)->getReponseCorrecte(),"1");
+        REQUIRE_EQ(quest->getQuestionNumero(1)->Intitule(),"Quelle est la capitale de la France?");
+        REQUIRE_EQ(quest->getQuestionNumero(1)->getReponseCorrecte(),"1");
 
 
     }

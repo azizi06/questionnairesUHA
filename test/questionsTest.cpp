@@ -1,7 +1,7 @@
 #include "./include/doctest.h"
-#include "./include/questionTexte.h"
-#include "./include/questionNumerique.h"
-#include "./include/questionChoixMultiple.h"
+#include "../src/include/questionTexte.h"
+#include "../src/include/questionNumerique.h"
+#include "../src/include/questionChoixMultiple.h"
 
 // On regroupe tous les tests des questions ici
 TEST_CASE("Tests unitaires des classes de questions") {
@@ -9,13 +9,13 @@ TEST_CASE("Tests unitaires des classes de questions") {
     //tEST pour les question text
     SUBCASE("Test de QuestionTexte") {
         questionTexte q{"Quelle est la capitale de la France ?", "Paris"};
-        
+
         //Verifier si on accepte la bonne reponse
         REQUIRE(q.estBonneReponse("Paris") == true);
-        
+
         // verifier si on refuse la mauvaise reponse
         REQUIRE(q.estBonneReponse("Lyon") == false);
-        
+
         //verifie que notre methode renvoi exactement la meme chaine de caractere
         REQUIRE(q.getReponseCorrecte() == "Paris");
     }
@@ -27,10 +27,10 @@ TEST_CASE("Tests unitaires des classes de questions") {
 
         // Verif de la reponse juste
         REQUIRE(Qnum.estBonneReponse("10") == true);
-        
+
         // Test de si utilisateur ecrit du text au lieu de chiffres
         // Ca ne doit pas planter le programme (grace au try-catch dans le .cpp)
-        CHECK(qn.estBonneReponse("abc") == false);
+        CHECK(Qnum.estBonneReponse("abc") == false);
     }
 
     // Test pour QCM
@@ -41,7 +41,7 @@ TEST_CASE("Tests unitaires des classes de questions") {
 
         // On verifie que l'utilisateur doit taper "1" pour avoir juste
         REQUIRE(qcm.estBonneReponse("1") == true);
-        
+
         // Verif que l'index 0 est faux
         REQUIRE(qcm.estBonneReponse("0") == false);
     }
