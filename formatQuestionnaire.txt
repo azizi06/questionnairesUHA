@@ -1,21 +1,18 @@
 #[titre questionnaires]
-QT
-{
-    //question texte
+QT //question texte
+{ 
     [intitulé question]
     [reponse texte]
 }
-QN
-{
-    //question numerique
+QN //question numerique
+{ 
     [intitulé question]
     [reponse numerique]
     [valeur min]
     [valeur max]
 }
-QC
+QC //question choix multiple
 {
-    //question choix multiple
     [intitulé question]
     [choix1,choix2,choix3,choix4]
     [1]  // indice de la réponse correcte

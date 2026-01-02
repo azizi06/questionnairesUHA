@@ -31,9 +31,9 @@ void affichage::pause()const{
 void affichage::dessinerCadre() const {
     std::string ligne{"+-------------------------------------------------------------------------------+"};
     int hauteur = 25;
-    // Haut
+
     goto_xy(0, 0);  d_ost << ligne;
-    // Bas
+
     goto_xy(0, hauteur); d_ost << ligne;
 
 
