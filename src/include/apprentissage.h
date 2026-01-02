@@ -7,6 +7,7 @@
 class apprentissage {
 public:
 
+
     // L'affichage est injecté (réel ou mock), ce qui rend la classe testable
     apprentissage(const questionnaire* questionnaire,affichageInterface* a);
     void apprendre() ;
